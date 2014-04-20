@@ -7,13 +7,14 @@ import flixel.util.FlxRect;
 import haxe.io.Path;
 import haxe.Json;
 import openfl.Assets;
+import flixel.addons.display.FlxExtendedSprite;
 
 /**
  * ...
  * @author NxT
  */
 
-class Character extends FlxSprite
+class Character extends FlxExtendedSprite
 {
 
 	private var direction:Int;
@@ -23,151 +24,119 @@ class Character extends FlxSprite
 	public var maxBounds:FlxRect;
 	public var controllable:Bool = false;
 	public var anim:String;
+	public var rolling:Bool = false;
 	
-	public function new(X:Float, Y:Float, SimpleGraphic:Dynamic, JsonPath:String) 
+	public function new(X:Float, Y:Float, ?JsonPath:String, ?SimpleGraphic:Dynamic) 
 	{
 		super(x, y, SimpleGraphic);
 		parseJson(JsonPath);
-		this.facing = FlxObject.LEFT;
+		trace("created character");
+		this.facing = FlxObject.DOWN;
 		
-		this.loadGraphic(graphic, true, false, width, height);
+		this.maxVelocity.x = 20;
+		this.maxVelocity.y = 20;
 		
-		//add the dank animation
-		//TODO add this into JSON form
-		/*
-		this.animation.add("standingRight", [1], 15, false);
-		this.animation.add("standingLeft", [5], 15, false);
-		this.animation.add("right", [0, 1, 2, 3], 15, true);
-		this.animation.add("left", [4, 5, 6, 7], 15, true);
-		this.animation.add("jumpLeft", [10, 11], 10, false);
-		this.animation.add("jumpRight", [8, 9], 10, false);
-		this.animation.add("fallLeft", [11], 10, false);
-		this.animation.add("fallRight", [9], 10, false);
-		this.animation.add("rollRight", [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23], 20, false);
-		this.animation.add("rollLeft", [35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24], 20, false);
-		
-		*/
-		this.animation.play("rollRight");
+		this.drag.x = this.maxVelocity.x * 4;
+		this.drag.y = this.maxVelocity.y * 4;
 	}
 	
-	public override function update();
+	public override function update()
 	{
-		/*
-		if (this.direction == 1 && this.isTouching(FlxObject.FLOOR) && this.isBusy == false)
-		{
-			this.animation.play("standingLeft");
-		}
-		
-		if (this.direction == 0 && this.isTouching(FlxObject.FLOOR) && this.isBusy == false)
-		{
-			this.animation.play("standingRight");
-		}
-		
-		//set acceleration to zero
-		this.acceleration.x = 0;
-
-		if (FlxG.keys.anyPressed(["LEFT", "A"]))
-        {
-            this.acceleration.x = -this.maxVelocity.x * 4;
-			this.direction = 1;
-			
-			
-			if (this.isTouching(FlxObject.FLOOR) && this.isBusy == false )
-			{
-				this.animation.play("left");
-			}
-			
-        }
-        if (FlxG.keys.anyPressed(["RIGHT", "D"]))
-        {
-			this.direction = 0;
-			
-			if (this.isTouching(FlxObject.FLOOR) && this.isBusy == false )
-			{
-				this.animation.play("right");	
-			}
-			
-			this.acceleration.x = this.maxVelocity.x * 4;
-			
-			
-		}
-		
-		if (FlxG.keys.anyPressed(["Z"]) && this.isBusy == false)
-		{
-			this.isBusy = true;
-			if (this.direction == 0)
-			{
-				//this.velocity.x += this.maxVelocity.x * 10;
-				//this code will do a 'flash', could be useful
-				
-				this.velocity.x += 10;
-				this.animation.play("rollRight");
-			}
-			
-			if (this.direction == 1)
-			{
-				//this.velocity.x += -this.maxVelocity.x * 10;
-				
-				this.velocity.x -= 10;
-				this.animation.play("rollLeft");
-			}
-		}
-		
-		if (this.animation.finished == true)
-		{
-			this.isBusy = false;
-		}
-		
-        if (FlxG.keys.anyPressed(["X"]) && this.isTouching(FlxObject.FLOOR))
-        {
-            this.velocity.y = -this.maxVelocity.y / 2.5;
-			justJumped = true;
-			jumpPlayed = false;
-			
-			if (this.direction == 0)
-			{
-				this.animation.play("jumpRight");
-			}
-			
-			if (this.direction == 1)
-			{
-				this.animation.play("jumpLeft");
-			}
-        }
-
-	
-		if (!this.isTouching(FlxObject.FLOOR) && this.direction == 0 && this.isBusy == false)
-		{
-			this.animation.play("fallRight");
-		}
-		
-		if (!this.isTouching(FlxObject.FLOOR) && this.direction == 1 && this.isBusy == false)
-		{
-			this.animation.play("fallLeft");
-		}
-		
-		*/
-		
 		if (controllable)
 		{
-			this.acceleration.
+			this.acceleration.x = 0;
+			this.acceleration.y = 0;
+			
+			if (FlxG.keys.anyPressed(["RIGHT"]))
+			{
+				this.acceleration.x = this.drag.x;
+				this.facing = FlxObject.RIGHT;
+				if (FlxG.keys.anyPressed(["X"]))
+				{
+					rolling = true;	
+				}
+			}
+			else if (FlxG.keys.anyPressed(["LEFT"]))
+			{
+				this.acceleration.x = -this.drag.x;
+				this.facing = FlxObject.LEFT;
+				if (FlxG.keys.anyPressed(["X"]))
+				{
+					rolling = true;
+				}
+			}
+			
+			if (FlxG.keys.anyPressed(["UP"]))
+			{
+				this.acceleration.y = -this.drag.y;
+				this.facing = FlxObject.UP;
+			}
+			else if (FlxG.keys.anyPressed(["DOWN"]))
+			{
+				this.acceleration.y = this.drag.y;
+				this.facing = FlxObject.DOWN;
+			}	
 		}
-		
-		
+		//TODO add checkBoundsMap function in
+		//checkBoundsMap();
+		doAnimation();
 		super.update();
 	}
 	
+	public function setBoundsMap(boundsMap:FlxRect) 
+	{
+		this.maxBounds = boundsMap;
+	}
+
+	private function checkBoundsMap():Void
+	{
+		if (maxBounds == null) {
+			return;
+		}
+
+		if (x + collisionMap.x < maxBounds.x)
+		{
+			x = maxBounds.x - collisionMap.x;
+			acceleration.x = 0;
+		}
+		else if ((x + collisionMap.x + collisionMap.width) > (maxBounds.x + maxBounds.width))
+		{
+			x = (maxBounds.x + maxBounds.width) - collisionMap.width - collisionMap.x;
+			acceleration.x = 0;
+		}
+
+		if (y + collisionMap.y < maxBounds.y)
+		{
+			y = maxBounds.y - collisionMap.y;
+			acceleration.y = 0;
+		}
+		else if ((y + collisionMap.y + collisionMap.height) > (maxBounds.y + maxBounds.height))
+		{
+			y = (maxBounds.y + maxBounds.height) - collisionMap.height - collisionMap.y;
+			acceleration.y = 0;
+		}
+	}
+
 	//TODO rewrite doAnimation so it's agnostic for topdown, 2.5D, and side-scrolling
 	private function doAnimation()
 	{
 		anim = "idle_";
-		
+		//trace("doing animation");
 		//find the type of motion we're doing and add it to anim
 		//TODO add the roll animation type
-		if (velocity.y != 0 || velocity.y != 0)
+		
+		if (velocity.y != 0 || velocity.x != 0)
 		{
-			anim = "walking_";
-			
+			//check if rolling
+			if (rolling == true)
+			{
+				anim = "rolling_";
+			}
+			else
+			{
+				anim = "walking_";
+			}
+			//check the facing
 			if (velocity.y > 0)
 			{
 				facing = FlxObject.DOWN;
@@ -185,7 +154,7 @@ class Character extends FlxSprite
 			{
 				facing = FlxObject.LEFT;
 			}
-		}
+		}	
 		switch(facing)
 		{
 			case FlxObject.UP:
@@ -213,6 +182,7 @@ class Character extends FlxSprite
 	
 	private function parseJson(file:String)
 	{
+		
 		//Based on the HaxeFlixel FlipRotationAnimationTiles example ...
 		//.. with more swag
 		//Fuck yo code conventions
@@ -221,44 +191,52 @@ class Character extends FlxSprite
 		var fileString:String = Assets.getText(file);
 		if (fileString == null)
 		{
-			throw 'JSON definition file not found';
+			throw 'JSON definition file {$file} not found';
 		}
+
 		
-		var json = Json.parse(fileString);
+		var json = haxe.Json.parse(fileString);
+		trace("JSON parse OK!");
 		
 		//get and set the texture file
 		var texture:String = filePath.dir + "/" + json.sprite.texture;
 		var frameWidth:Int = json.sprite.framewidth;
 		var frameHeight:Int = json.sprite.frameheight;
+		this.loadGraphic(texture, true, false, frameWidth, frameHeight);
+		trace("texture OK!");
+		
 		
 		//get and set the character's velocities
 		var xmax:Int = json.velocity.xmax;
 		var ymax:Int = json.velocity.ymax;
+		trace("velocity OK!");
 		
 		//get and set the character's collision mask
 		var col_x:Int = json.collision.x;
 		var col_y:Int = json.collision.y;
 		var col_width:Int = json.collision.width;
 		var col_height:Int = json.collision.height;
-		collisions = FlxRect.get(col_x, col_y, col_width, col_height);
+		collisionMap = new FlxRect(col_x, col_y, col_width, col_height);
+		trace("collision OK!");
 		
 		//add animations
 		var vel_default:Int = json.animation.framerate.def;
 		var vel_idle:Int = json.animation.framerate.idle;
 		var vel_walking:Int = json.animation.framerate.walking;
-		var vel_special:Int = json.animation.framerate.special;
+		var vel_rolling:Int = json.animation.framerate.rolling;
+		trace("animation OK!");
 		
 		//go through and add all the animations
 		//form is type_direction
 		
 		var tmp:Int;
-		for (dir in Reflect.fields(json.animations.frames)) 
+		for (dir in Reflect.fields(json.animation.frames)) 
 		{
-			var d = Reflect.field(json.animations.frames, dir);
-			for (type in Reflect.fields(d)) 
+			var d = Reflect.field(json.animation.frames, dir);
+			for (type in Reflect.fields(d))
 			{
 				var t = Reflect.field(d, type);
-				switch(type) 
+				switch(type)
 				{
 					case "def":
 						tmp = vel_default;
@@ -270,17 +248,14 @@ class Character extends FlxSprite
 						tmp = vel_walking;
 
 					case "special":
-						tmp = vel_special;
+						tmp = vel_rolling;
 
 					default:
-						tmp = v_def;
+						tmp = vel_default;
 				}
 				animation.add(type + "_" + dir, t, tmp, true);
+				trace(type + "_" + dir);
 			}
-		
 		}
-	
-	
-	
-	
+	}	
 }
