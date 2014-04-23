@@ -33,8 +33,8 @@ class Character extends FlxExtendedSprite
 		trace("created character");
 		this.facing = FlxObject.DOWN;
 		
-		this.maxVelocity.x = 20;
-		this.maxVelocity.y = 20;
+		this.x = X;
+		this.y = Y;
 		
 		this.drag.x = this.maxVelocity.x * 4;
 		this.drag.y = this.maxVelocity.y * 4;
@@ -60,6 +60,7 @@ class Character extends FlxExtendedSprite
 			{
 				this.acceleration.x = -this.drag.x;
 				this.facing = FlxObject.LEFT;
+				//trace("left");
 				if (FlxG.keys.anyPressed(["X"]))
 				{
 					rolling = true;
@@ -78,7 +79,7 @@ class Character extends FlxExtendedSprite
 			}	
 		}
 		//TODO add checkBoundsMap function in
-		//checkBoundsMap();
+		checkBoundsMap();
 		doAnimation();
 		super.update();
 	}
@@ -120,11 +121,10 @@ class Character extends FlxExtendedSprite
 	//TODO rewrite doAnimation so it's agnostic for topdown, 2.5D, and side-scrolling
 	private function doAnimation()
 	{
-		anim = "idle_";
-		//trace("doing animation");
-		//find the type of motion we're doing and add it to anim
 		//TODO add the roll animation type
 		
+		anim = "idle_";
+		//find the type of motion we're doing and add it to anim
 		if (velocity.y != 0 || velocity.x != 0)
 		{
 			//check if rolling
@@ -205,10 +205,11 @@ class Character extends FlxExtendedSprite
 		this.loadGraphic(texture, true, false, frameWidth, frameHeight);
 		trace("texture OK!");
 		
-		
 		//get and set the character's velocities
 		var xmax:Int = json.velocity.xmax;
 		var ymax:Int = json.velocity.ymax;
+		this.maxVelocity.x = xmax;
+		this.maxVelocity.y = ymax;
 		trace("velocity OK!");
 		
 		//get and set the character's collision mask
@@ -254,7 +255,7 @@ class Character extends FlxExtendedSprite
 						tmp = vel_default;
 				}
 				animation.add(type + "_" + dir, t, tmp, true);
-				trace(type + "_" + dir);
+				//trace(type + "_" + dir);
 			}
 		}
 	}	
