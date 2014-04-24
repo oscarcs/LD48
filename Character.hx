@@ -25,6 +25,7 @@ class Character extends FlxExtendedSprite
 	public var controllable:Bool = false;
 	public var anim:String;
 	public var rolling:Bool = false;
+	public var message:Message;
 	
 	public function new(X:Float, Y:Float, ?JsonPath:String, ?SimpleGraphic:Dynamic) 
 	{
@@ -219,6 +220,19 @@ class Character extends FlxExtendedSprite
 		var col_height:Int = json.collision.height;
 		collisionMap = new FlxRect(col_x, col_y, col_width, col_height);
 		trace("collision OK!");
+
+		//add dialog text
+		//TODO fix the fact that this is a cheeky hack because I don't understand Haxe.Reflect
+		message = new Message([]);
+		var ctr:Int = 0;
+		for (dialog in Reflect.fields(json.dialog))
+		{
+			message.pages[ctr] = new Page(dialog);
+			trace(message.pages[ctr].text);
+			ctr++;
+		}
+		
+		
 		
 		//add animations
 		var vel_default:Int = json.animation.framerate.def;
@@ -259,4 +273,11 @@ class Character extends FlxExtendedSprite
 			}
 		}
 	}	
+	
+	public function getMessage()
+	{
+		return message;
+	}
+	
+	
 }

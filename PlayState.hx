@@ -44,6 +44,8 @@ class PlayState extends FlxState
 		Reg.dialog = new Dialog();
 		add(Reg.dialog);
 		
+		player.forceComplexRender = true;
+		
 		message = new Message([ new Page("This is page 1 of the test message"),
 								new Page("This is page 2 of the test message")]);
 		
@@ -61,12 +63,16 @@ class PlayState extends FlxState
 		super.update();
 			
 		FlxG.camera.zoom = Reg.zoomLevel;
+		//Reg.zoomLevel += 0.005;
+		FlxG.camera.follow(player);
 		
 		if (FlxG.keys.anyJustPressed(["X"])) 
 		{
+			//FlxG.camera.shake(0.01, 0.5);
+			
 			if (Reg.inDialog == false) 
 			{
-				Reg.dialog.showDialog(getMessage());
+				Reg.dialog.showDialog(player.getMessage());
 				trace("not in dialog, starting");
 			}
 			else 
@@ -78,6 +84,9 @@ class PlayState extends FlxState
 		
 		if (FlxG.keys.anyJustReleased(["Z"]))
 		{
+			
+
+			
 			if (Reg.zoomLevel == 3)
 			{
 				Reg.zoomLevel = 2;
@@ -89,6 +98,10 @@ class PlayState extends FlxState
 			else if (Reg.zoomLevel == 1)
 			{
 				Reg.zoomLevel = 3;
+			}
+			else 
+			{
+				Reg.zoomLevel = 1;
 			}
 		}
 		
