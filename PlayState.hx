@@ -36,15 +36,13 @@ class PlayState extends FlxState
 		add(coins);
 		testmap.loadObjects(this);
 		
+		FlxG.camera.follow(player);
 		FlxG.camera.zoom = Reg.zoomLevel;
 		player.controllable = true;
-		FlxG.camera.follow(player);
 		
 		//assign and add the dialog object.
 		Reg.dialog = new Dialog();
 		add(Reg.dialog);
-		
-		player.forceComplexRender = true;
 		
 		message = new Message([ new Page("This is page 1 of the test message"),
 								new Page("This is page 2 of the test message")]);
@@ -68,7 +66,7 @@ class PlayState extends FlxState
 		
 		if (FlxG.keys.anyJustPressed(["X"])) 
 		{
-			//FlxG.camera.shake(0.01, 0.5);
+			FlxG.camera.shake(0.01, 0.5);
 			
 			if (Reg.inDialog == false) 
 			{
@@ -84,26 +82,18 @@ class PlayState extends FlxState
 		
 		if (FlxG.keys.anyJustReleased(["Z"]))
 		{
+			FlxG.camera.width = FlxG.width;
+			FlxG.camera.height = FlxG.height;
 			
-
-			
-			if (Reg.zoomLevel == 3)
-			{
-				Reg.zoomLevel = 2;
-			}
-			else if (Reg.zoomLevel == 2)
-			{
+			Reg.zoomLevel += 1;
+			if (Reg.zoomLevel > 3)
+			{	
 				Reg.zoomLevel = 1;
 			}
-			else if (Reg.zoomLevel == 1)
-			{
-				Reg.zoomLevel = 3;
-			}
-			else 
-			{
-				Reg.zoomLevel = 1;
-			}
+			FlxG.camera.width = Std.int(FlxG.camera.width / Reg.zoomLevel);
+			FlxG.camera.height = Std.int(FlxG.camera.height / Reg.zoomLevel);
 		}
+			//TODO Appropriately change dialogue box position
 		
 	}
 	
