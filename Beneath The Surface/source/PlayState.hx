@@ -8,6 +8,7 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import flixel.FlxObject;
 import flixel.group.FlxGroup;
+import flixel.util.FlxCollision;
 
 class PlayState extends FlxState
 {
@@ -29,7 +30,7 @@ class PlayState extends FlxState
 	public var player:Character;
 	public var floor:FlxObject;
 	public var exit:FlxSprite;	
-	private var lol:Shrine;
+	private var lol:Weapon;
 	
 	override public function create():Void
 	{
@@ -43,7 +44,6 @@ class PlayState extends FlxState
 		shrines = new FlxGroup();
 		add(shrines);
 		testmap.loadObjects(this);
-	
 
 		//add(Reg.player);
 
@@ -52,7 +52,17 @@ class PlayState extends FlxState
 		FlxG.camera.height = Std.int(FlxG.camera.height / Reg.zoomLevel);
 		FlxG.camera.follow(player);
 		
+		lol = new Weapon(player.x, player.x, player, 16);
+		add(lol);
+		
 		player.controllable = true;
+		
+		
+		//THIS IS IMPORTANT
+		//FIX IT LATER
+		//OR YOU WILL DIE
+		//A SLOW, PAINFUL, DEATH
+		FlxG.worldBounds.set(0, 0, 1000, 1000);
 		
 	}
 
@@ -65,6 +75,22 @@ class PlayState extends FlxState
 	{
 		testmap.collideWithLevel(player);
 		shrines.callAll("checkActivation", [player, this], true);
+		//FlxG.collide(player, shrines);
+		
+		if (FlxG.keys.anyPressed(["C"]))
+		{
+			lol.drawWeapon();
+		}
+		if (FlxG.keys.anyJustReleased(["C"]))
+		{
+			lol.fire();
+		}
+		
+		lol.x = player.x;
+		lol.y = player.y;
+		//trace("gun: X: " + lol.x + " Y: " + lol.y);
+		//trace("player: X: " + player.x + " Y: " + player.y);
+		
 		super.update();	
 	}
 }

@@ -22,11 +22,11 @@ class Shrine extends FlxExtendedSprite
 		super(x, y);
 		
 		this.loadGraphic("assets/images/shrine.png", true, 16, 32);
-		trace("shrine tex ok");
+		//trace("shrine tex ok");
 		
 		this.animation.add("static", [0], 0, true);
 		this.animation.add("activate", [0, 1, 2, 3, 4, 5, 6], 15, false);
-		trace("adddcjjed shrine");
+		//trace("adddcjjed shrine");
 		animation.play("static");
 	}
 	

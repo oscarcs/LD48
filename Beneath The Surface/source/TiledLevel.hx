@@ -128,9 +128,11 @@ class TiledLevel extends TiledMap
 				state.floor = floor;
 
 			case "shrine":
-				trace("adding shrine");
+				//trace("adding shrine");
 				//var tileset = g.map.getGidOwner(o.gid);
 				var shrine = new Shrine(x,y);
+				shrine.solid = true;
+				shrine.immovable = true;
 				state.shrines.add(shrine);
 
 			case "exit":
@@ -150,6 +152,7 @@ class TiledLevel extends TiledMap
 			for (map in collidableTileLayers)
 			{
 				//Colliding map with objects to avoid errors. Collision here is only done with tile layers not objects.
+				//trace("collidiing");
 				return FlxG.overlap(map, obj, notifyCallback, processCallback != null ? processCallback : FlxObject.separate);
 			}
 		}

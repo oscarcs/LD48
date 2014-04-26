@@ -46,6 +46,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/testplayer.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/data/tileset.png", __ASSET__assets_data_tileset_png);
 		type.set ("assets/data/tileset.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("assets/images/bow.png", __ASSET__assets_images_bow_png);
+		type.set ("assets/images/bow.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/images/main.json", __ASSET__assets_images_main_json);
 		type.set ("assets/images/main.json", Reflect.field (AssetType, "text".toUpperCase ()));
 		className.set ("assets/images/shrine.png", __ASSET__assets_images_shrine_png);
@@ -58,6 +60,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/tileset.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/images/titleParts.png", __ASSET__assets_images_titleparts_png);
 		type.set ("assets/images/titleParts.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("assets/images/weapon.png", __ASSET__assets_images_weapon_png);
+		type.set ("assets/images/weapon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/sounds/beep.mp3", __ASSET__assets_sounds_beep_mp3);
 		type.set ("assets/sounds/beep.mp3", Reflect.field (AssetType, "music".toUpperCase ()));
 		className.set ("assets/sounds/flixel.mp3", __ASSET__assets_sounds_flixel_mp3);
@@ -71,12 +75,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 		addExternal("assets/data/testplayer.json", "text", "assets/data/testplayer.json");
 		addExternal("assets/data/testplayer.png", "image", "assets/data/testplayer.png");
 		addExternal("assets/data/tileset.png", "image", "assets/data/tileset.png");
+		addExternal("assets/images/bow.png", "image", "assets/images/bow.png");
 		addExternal("assets/images/main.json", "text", "assets/images/main.json");
 		addExternal("assets/images/shrine.png", "image", "assets/images/shrine.png");
 		addExternal("assets/images/sprPlayer.png", "image", "assets/images/sprPlayer.png");
 		addExternal("assets/images/tileset.pdn", "binary", "assets/images/tileset.pdn");
 		addExternal("assets/images/tileset.png", "image", "assets/images/tileset.png");
 		addExternal("assets/images/titleParts.png", "image", "assets/images/titleParts.png");
+		addExternal("assets/images/weapon.png", "image", "assets/images/weapon.png");
 		addExternal("assets/sounds/beep.mp3", "music", "assets/sounds/beep.mp3");
 		addExternal("assets/sounds/flixel.mp3", "music", "assets/sounds/flixel.mp3");
 		
@@ -102,6 +108,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("assets/data/tileset.png", __ASSET__assets_data_tileset_png);
 		type.set ("assets/data/tileset.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
+		className.set ("assets/images/bow.png", __ASSET__assets_images_bow_png);
+		type.set ("assets/images/bow.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
 		className.set ("assets/images/main.json", __ASSET__assets_images_main_json);
 		type.set ("assets/images/main.json", Reflect.field (AssetType, "text".toUpperCase ()));
 		
@@ -119,6 +128,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("assets/images/titleParts.png", __ASSET__assets_images_titleparts_png);
 		type.set ("assets/images/titleParts.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("assets/images/weapon.png", __ASSET__assets_images_weapon_png);
+		type.set ("assets/images/weapon.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("assets/sounds/beep.mp3", __ASSET__assets_sounds_beep_mp3);
 		type.set ("assets/sounds/beep.mp3", Reflect.field (AssetType, "music".toUpperCase ()));
@@ -713,17 +725,21 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__assets_data_testplayer_json extends flash.utils.ByteArray { }
 @:keep class __ASSET__assets_data_testplayer_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_data_tileset_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_bow_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_main_json extends flash.utils.ByteArray { }
 @:keep class __ASSET__assets_images_shrine_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_sprplayer_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_tileset_pdn extends flash.utils.ByteArray { }
 @:keep class __ASSET__assets_images_tileset_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_titleparts_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_weapon_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_sounds_beep_mp3 extends flash.media.Sound { }
 @:keep class __ASSET__assets_sounds_flixel_mp3 extends flash.media.Sound { }
 
 
 #elseif html5
+
+
 
 
 
@@ -748,12 +764,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:file("assets/data/testplayer.json") class __ASSET__assets_data_testplayer_json extends flash.utils.ByteArray {}
 @:bitmap("assets/data/testplayer.png") class __ASSET__assets_data_testplayer_png extends flash.display.BitmapData {}
 @:bitmap("assets/data/tileset.png") class __ASSET__assets_data_tileset_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/bow.png") class __ASSET__assets_images_bow_png extends flash.display.BitmapData {}
 @:file("assets/images/main.json") class __ASSET__assets_images_main_json extends flash.utils.ByteArray {}
 @:bitmap("assets/images/shrine.png") class __ASSET__assets_images_shrine_png extends flash.display.BitmapData {}
 @:bitmap("assets/images/sprPlayer.png") class __ASSET__assets_images_sprplayer_png extends flash.display.BitmapData {}
 @:file("assets/images/tileset.pdn") class __ASSET__assets_images_tileset_pdn extends flash.utils.ByteArray {}
 @:bitmap("assets/images/tileset.png") class __ASSET__assets_images_tileset_png extends flash.display.BitmapData {}
 @:bitmap("assets/images/titleParts.png") class __ASSET__assets_images_titleparts_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/weapon.png") class __ASSET__assets_images_weapon_png extends flash.display.BitmapData {}
 @:sound("E:/Haxe/haxe/lib/flixel/3,3,0/assets/sounds/beep.mp3") class __ASSET__assets_sounds_beep_mp3 extends flash.media.Sound {}
 @:sound("E:/Haxe/haxe/lib/flixel/3,3,0/assets/sounds/flixel.mp3") class __ASSET__assets_sounds_flixel_mp3 extends flash.media.Sound {}
 

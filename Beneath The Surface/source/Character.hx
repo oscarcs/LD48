@@ -38,6 +38,8 @@ class Character extends FlxExtendedSprite
 		this.x = X;
 		this.y = Y;
 		
+		this.solid = true;
+		
 		this.drag.x = this.maxVelocity.x * 4;
 		this.drag.y = this.maxVelocity.y * 4;
 	}
