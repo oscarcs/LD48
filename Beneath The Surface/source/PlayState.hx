@@ -16,10 +16,11 @@ class PlayState extends FlxState
 	
 	//TODO get rid of this shite
 	
-	public var coins:FlxGroup;
+	public var shrines:FlxGroup;
 	public var player:Character;
 	public var floor:FlxObject;
 	public var exit:FlxSprite;	
+	private var lol:Shrine;
 	
 	override public function create():Void
 	{
@@ -32,8 +33,8 @@ class PlayState extends FlxState
 		add(testmap.foregroundTiles);
 		testmap.loadObjects(this);
 		
-		coins = new FlxGroup();
-		add(coins);
+		shrines = new FlxGroup();
+		add(shrines);
 
 		//add(Reg.player);
 
@@ -42,6 +43,10 @@ class PlayState extends FlxState
 		FlxG.camera.height = Std.int(FlxG.camera.height / Reg.zoomLevel);
 		FlxG.camera.follow(player);
 			
+		
+		lol = new Shrine(player.x, player.y);
+		add(lol);
+		
 		player.controllable = true;
 		
 	}
@@ -54,6 +59,8 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		testmap.collideWithLevel(player);
+		shrines.callAll("checkActivation", [player, this], true);	
+		lol.checkActivation(player, this);
 		super.update();	
 	}
 }

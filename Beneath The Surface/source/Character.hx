@@ -25,6 +25,7 @@ class Character extends FlxExtendedSprite
 	public var controllable:Bool = false;
 	public var anim:String;
 	public var rolling:Bool = false;
+	public var rollTimer:Float = 0;
 	//public var message:Message;
 	
 	public function new(X:Float, Y:Float, ?JsonPath:String, ?SimpleGraphic:Dynamic) 
@@ -43,6 +44,18 @@ class Character extends FlxExtendedSprite
 	
 	public override function update()
 	{
+		if (rollTimer > 2.5)
+		{
+			rolling = false;
+			rollTimer = 0;
+		}
+		
+		if (rolling == true)
+		{
+			trace("rolling. RollTimer: " + rollTimer);
+			rollTimer += FlxG.elapsed;
+		}
+		
 		if (controllable)
 		{
 			this.acceleration.x = 0;
@@ -52,7 +65,7 @@ class Character extends FlxExtendedSprite
 			{
 				this.acceleration.x = this.drag.x;
 				this.facing = FlxObject.RIGHT;
-				if (FlxG.keys.anyPressed(["X"]))
+				if (FlxG.keys.anyPressed(["X"]) && rolling == false)
 				{
 					rolling = true;	
 				}
@@ -61,8 +74,8 @@ class Character extends FlxExtendedSprite
 			{
 				this.acceleration.x = -this.drag.x;
 				this.facing = FlxObject.LEFT;
-				trace("left");
-				if (FlxG.keys.anyPressed(["X"]))
+				//trace("left");
+				if (FlxG.keys.anyPressed(["X"]) && rolling == false)
 				{
 					rolling = true;
 				}
@@ -72,11 +85,19 @@ class Character extends FlxExtendedSprite
 			{
 				this.acceleration.y = -this.drag.y;
 				this.facing = FlxObject.UP;
+				if (FlxG.keys.anyPressed(["X"]) && rolling == false)
+				{
+					rolling = true;
+				}
 			}
 			else if (FlxG.keys.anyPressed(["DOWN"]))
 			{
 				this.acceleration.y = this.drag.y;
 				this.facing = FlxObject.DOWN;
+				if (FlxG.keys.anyPressed(["X"]) && rolling == false)
+				{
+					rolling = true;
+				}
 			}	
 		}
 		//TODO add checkBoundsMap function in
@@ -133,7 +154,6 @@ class Character extends FlxExtendedSprite
 			{
 				anim = "rolling_";
 			}
-			else
 			{
 				anim = "walking_";
 			}
@@ -266,7 +286,7 @@ class Character extends FlxExtendedSprite
 					case "walking":
 						tmp = vel_walking;
 
-					case "special":
+					case "rolling":
 						tmp = vel_rolling;
 
 					default:
