@@ -25,20 +25,24 @@ class PlayState extends FlxState
 	{
 		super.create();
 		trace("creating");
-		Reg.player = new Character(0, 0, "/images/main.json");
-		Reg.player = player;
+		//Reg.player
 	
 		testmap = new TiledLevel("assets/data/leveltest.tmx");
 		add(testmap.backgroundTiles);
 		add(testmap.foregroundTiles);
+		testmap.loadObjects(this);
 		
 		coins = new FlxGroup();
 		add(coins);
-		
+
+		//add(Reg.player);
+
 		FlxG.camera.zoom = Reg.zoomLevel;
-		
-		testmap.loadObjects(this);
-		
+		FlxG.camera.width = Std.int(FlxG.camera.width / Reg.zoomLevel);
+		FlxG.camera.height = Std.int(FlxG.camera.height / Reg.zoomLevel);
+		FlxG.camera.follow(player);
+			
+		player.controllable = true;
 		
 	}
 
@@ -49,6 +53,7 @@ class PlayState extends FlxState
 
 	override public function update():Void
 	{
+		testmap.collideWithLevel(player);
 		super.update();	
 	}
 }

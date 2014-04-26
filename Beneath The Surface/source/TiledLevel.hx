@@ -116,7 +116,7 @@ class TiledLevel extends TiledMap
 		{
 			case "playerstart":
 				//create a character. Might be easier to add a reference to the player in the Reg class.
-				var player = new Character(o.x, o.y, "assets/data/charactertest.json");
+				var player = new Character(o.x, o.y, "assets/data/testplayer.json");
 				state.player = player;
 				state.add(player);
 				FlxG.camera.follow(player);

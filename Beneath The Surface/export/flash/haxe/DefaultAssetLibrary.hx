@@ -40,10 +40,16 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/charactertest.json", Reflect.field (AssetType, "text".toUpperCase ()));
 		className.set ("assets/data/leveltest.tmx", __ASSET__assets_data_leveltest_tmx);
 		type.set ("assets/data/leveltest.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+		className.set ("assets/data/testplayer.json", __ASSET__assets_data_testplayer_json);
+		type.set ("assets/data/testplayer.json", Reflect.field (AssetType, "text".toUpperCase ()));
+		className.set ("assets/data/testplayer.png", __ASSET__assets_data_testplayer_png);
+		type.set ("assets/data/testplayer.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/data/tileset.png", __ASSET__assets_data_tileset_png);
 		type.set ("assets/data/tileset.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/images/main.json", __ASSET__assets_images_main_json);
 		type.set ("assets/images/main.json", Reflect.field (AssetType, "text".toUpperCase ()));
+		className.set ("assets/images/shrine.png", __ASSET__assets_images_shrine_png);
+		type.set ("assets/images/shrine.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/images/sprPlayer.png", __ASSET__assets_images_sprplayer_png);
 		type.set ("assets/images/sprPlayer.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/images/tileset.pdn", __ASSET__assets_images_tileset_pdn);
@@ -62,8 +68,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		addExternal("assets/data/charactertest.json", "text", "assets/data/charactertest.json");
 		addExternal("assets/data/leveltest.tmx", "text", "assets/data/leveltest.tmx");
+		addExternal("assets/data/testplayer.json", "text", "assets/data/testplayer.json");
+		addExternal("assets/data/testplayer.png", "image", "assets/data/testplayer.png");
 		addExternal("assets/data/tileset.png", "image", "assets/data/tileset.png");
 		addExternal("assets/images/main.json", "text", "assets/images/main.json");
+		addExternal("assets/images/shrine.png", "image", "assets/images/shrine.png");
 		addExternal("assets/images/sprPlayer.png", "image", "assets/images/sprPlayer.png");
 		addExternal("assets/images/tileset.pdn", "binary", "assets/images/tileset.pdn");
 		addExternal("assets/images/tileset.png", "image", "assets/images/tileset.png");
@@ -84,11 +93,20 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("assets/data/leveltest.tmx", __ASSET__assets_data_leveltest_tmx);
 		type.set ("assets/data/leveltest.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 		
+		className.set ("assets/data/testplayer.json", __ASSET__assets_data_testplayer_json);
+		type.set ("assets/data/testplayer.json", Reflect.field (AssetType, "text".toUpperCase ()));
+		
+		className.set ("assets/data/testplayer.png", __ASSET__assets_data_testplayer_png);
+		type.set ("assets/data/testplayer.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
 		className.set ("assets/data/tileset.png", __ASSET__assets_data_tileset_png);
 		type.set ("assets/data/tileset.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("assets/images/main.json", __ASSET__assets_images_main_json);
 		type.set ("assets/images/main.json", Reflect.field (AssetType, "text".toUpperCase ()));
+		
+		className.set ("assets/images/shrine.png", __ASSET__assets_images_shrine_png);
+		type.set ("assets/images/shrine.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("assets/images/sprPlayer.png", __ASSET__assets_images_sprplayer_png);
 		type.set ("assets/images/sprPlayer.png", Reflect.field (AssetType, "image".toUpperCase ()));
@@ -692,8 +710,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 @:keep class __ASSET__assets_data_charactertest_json extends flash.utils.ByteArray { }
 @:keep class __ASSET__assets_data_leveltest_tmx extends flash.utils.ByteArray { }
+@:keep class __ASSET__assets_data_testplayer_json extends flash.utils.ByteArray { }
+@:keep class __ASSET__assets_data_testplayer_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_data_tileset_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_main_json extends flash.utils.ByteArray { }
+@:keep class __ASSET__assets_images_shrine_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_sprplayer_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_tileset_pdn extends flash.utils.ByteArray { }
 @:keep class __ASSET__assets_images_tileset_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -716,13 +737,19 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
 #elseif (windows || mac || linux)
 
 
 @:file("assets/data/charactertest.json") class __ASSET__assets_data_charactertest_json extends flash.utils.ByteArray {}
 @:file("assets/data/leveltest.tmx") class __ASSET__assets_data_leveltest_tmx extends flash.utils.ByteArray {}
+@:file("assets/data/testplayer.json") class __ASSET__assets_data_testplayer_json extends flash.utils.ByteArray {}
+@:bitmap("assets/data/testplayer.png") class __ASSET__assets_data_testplayer_png extends flash.display.BitmapData {}
 @:bitmap("assets/data/tileset.png") class __ASSET__assets_data_tileset_png extends flash.display.BitmapData {}
 @:file("assets/images/main.json") class __ASSET__assets_images_main_json extends flash.utils.ByteArray {}
+@:bitmap("assets/images/shrine.png") class __ASSET__assets_images_shrine_png extends flash.display.BitmapData {}
 @:bitmap("assets/images/sprPlayer.png") class __ASSET__assets_images_sprplayer_png extends flash.display.BitmapData {}
 @:file("assets/images/tileset.pdn") class __ASSET__assets_images_tileset_pdn extends flash.utils.ByteArray {}
 @:bitmap("assets/images/tileset.png") class __ASSET__assets_images_tileset_png extends flash.display.BitmapData {}

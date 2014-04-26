@@ -61,7 +61,7 @@ class Character extends FlxExtendedSprite
 			{
 				this.acceleration.x = -this.drag.x;
 				this.facing = FlxObject.LEFT;
-				//trace("left");
+				trace("left");
 				if (FlxG.keys.anyPressed(["X"]))
 				{
 					rolling = true;
@@ -80,7 +80,7 @@ class Character extends FlxExtendedSprite
 			}	
 		}
 		//TODO add checkBoundsMap function in
-		checkBoundsMap();
+		//checkBoundsMap();
 		doAnimation();
 		super.update();
 	}
