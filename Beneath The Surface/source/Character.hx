@@ -25,7 +25,7 @@ class Character extends FlxExtendedSprite
 	public var controllable:Bool = false;
 	public var anim:String;
 	public var rolling:Bool = false;
-	public var message:Message;
+	//public var message:Message;
 	
 	public function new(X:Float, Y:Float, ?JsonPath:String, ?SimpleGraphic:Dynamic) 
 	{
@@ -203,7 +203,8 @@ class Character extends FlxExtendedSprite
 		var texture:String = filePath.dir + "/" + json.sprite.texture;
 		var frameWidth:Int = json.sprite.framewidth;
 		var frameHeight:Int = json.sprite.frameheight;
-		this.loadGraphic(texture, true, false, frameWidth, frameHeight);
+		//this.loadGraphic(texture, true, false, frameWidth, frameHeight);
+		this.loadGraphic(texture, true, frameWidth, frameHeight);
 		trace("texture OK!");
 		
 		//get and set the character's velocities
@@ -223,6 +224,9 @@ class Character extends FlxExtendedSprite
 
 		//add dialog text
 		//TODO fix the fact that this is a cheeky hack because I don't understand Haxe.Reflect
+		
+		//TODO Maybe use this at some point
+		/*
 		message = new Message([]);
 		var ctr:Int = 0;
 		for (dialog in Reflect.fields(json.dialog))
@@ -231,7 +235,7 @@ class Character extends FlxExtendedSprite
 			trace(message.pages[ctr].text);
 			ctr++;
 		}
-		
+		*/
 		
 		
 		//add animations
@@ -276,7 +280,7 @@ class Character extends FlxExtendedSprite
 	
 	public function getMessage()
 	{
-		return message;
+		//return message;
 	}
 	
 	

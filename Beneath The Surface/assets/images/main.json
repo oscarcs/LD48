@@ -1,0 +1,57 @@
+{
+	"sprite": {
+		"texture": "sprPlayer.png",
+		"framewidth": 16,
+		"frameheight": 16
+	},
+	"velocity": {
+		"xmax": 160,
+		"ymax": 160
+	},
+	"collision": {
+		"x": 0,
+		"y": 0,
+		"width": 16,
+		"height": 16
+	},
+	"dialog": {
+		"test of the dialog system": "",
+		"test no 2": ""
+	},
+	"animation": {
+		"framerate" : {
+			"def": 0,
+			"idle": 2,
+			"walking": 15,
+			"rolling": 5
+		},
+		"frames" : {
+			"up": {
+				"def": [0],
+				"idle": [0],
+				"walking":[0],
+				"rolling":[0]
+			},
+			"left": {
+				"def": [4],
+				"idle": [5],
+				"walking":[4,5,6,7],
+				"rolling":[24,25,26,27,28,29,30,31,32,33,34,34]
+				"jumping":[8,9]
+			},
+			"right": {
+				"def": [0],
+				"idle": [1],
+				"walking":[0,1,2,3],
+				"rolling":[12,13,14,15,16,17,18,19,20,21,22,23]
+				"jumping":[10,11]
+			},
+			"down": {
+				"def": [8],
+				"idle": [8,9],
+				"walking":[8,9,10,11],
+				"rolling":[8,9,10,11]
+			}
+		}
+	}
+}

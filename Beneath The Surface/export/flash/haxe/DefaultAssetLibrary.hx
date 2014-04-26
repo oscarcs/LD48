@@ -36,6 +36,20 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
+		className.set ("assets/data/charactertest.json", __ASSET__assets_data_charactertest_json);
+		type.set ("assets/data/charactertest.json", Reflect.field (AssetType, "text".toUpperCase ()));
+		className.set ("assets/data/leveltest.tmx", __ASSET__assets_data_leveltest_tmx);
+		type.set ("assets/data/leveltest.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+		className.set ("assets/data/tileset.png", __ASSET__assets_data_tileset_png);
+		type.set ("assets/data/tileset.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("assets/images/main.json", __ASSET__assets_images_main_json);
+		type.set ("assets/images/main.json", Reflect.field (AssetType, "text".toUpperCase ()));
+		className.set ("assets/images/sprPlayer.png", __ASSET__assets_images_sprplayer_png);
+		type.set ("assets/images/sprPlayer.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("assets/images/tileset.pdn", __ASSET__assets_images_tileset_pdn);
+		type.set ("assets/images/tileset.pdn", Reflect.field (AssetType, "binary".toUpperCase ()));
+		className.set ("assets/images/tileset.png", __ASSET__assets_images_tileset_png);
+		type.set ("assets/images/tileset.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/images/titleParts.png", __ASSET__assets_images_titleparts_png);
 		type.set ("assets/images/titleParts.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/sounds/beep.mp3", __ASSET__assets_sounds_beep_mp3);
@@ -46,6 +60,13 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#elseif html5
 		
+		addExternal("assets/data/charactertest.json", "text", "assets/data/charactertest.json");
+		addExternal("assets/data/leveltest.tmx", "text", "assets/data/leveltest.tmx");
+		addExternal("assets/data/tileset.png", "image", "assets/data/tileset.png");
+		addExternal("assets/images/main.json", "text", "assets/images/main.json");
+		addExternal("assets/images/sprPlayer.png", "image", "assets/images/sprPlayer.png");
+		addExternal("assets/images/tileset.pdn", "binary", "assets/images/tileset.pdn");
+		addExternal("assets/images/tileset.png", "image", "assets/images/tileset.png");
 		addExternal("assets/images/titleParts.png", "image", "assets/images/titleParts.png");
 		addExternal("assets/sounds/beep.mp3", "music", "assets/sounds/beep.mp3");
 		addExternal("assets/sounds/flixel.mp3", "music", "assets/sounds/flixel.mp3");
@@ -56,6 +77,27 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var loadManifest = false;
+		
+		className.set ("assets/data/charactertest.json", __ASSET__assets_data_charactertest_json);
+		type.set ("assets/data/charactertest.json", Reflect.field (AssetType, "text".toUpperCase ()));
+		
+		className.set ("assets/data/leveltest.tmx", __ASSET__assets_data_leveltest_tmx);
+		type.set ("assets/data/leveltest.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+		
+		className.set ("assets/data/tileset.png", __ASSET__assets_data_tileset_png);
+		type.set ("assets/data/tileset.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("assets/images/main.json", __ASSET__assets_images_main_json);
+		type.set ("assets/images/main.json", Reflect.field (AssetType, "text".toUpperCase ()));
+		
+		className.set ("assets/images/sprPlayer.png", __ASSET__assets_images_sprplayer_png);
+		type.set ("assets/images/sprPlayer.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("assets/images/tileset.pdn", __ASSET__assets_images_tileset_pdn);
+		type.set ("assets/images/tileset.pdn", Reflect.field (AssetType, "binary".toUpperCase ()));
+		
+		className.set ("assets/images/tileset.png", __ASSET__assets_images_tileset_png);
+		type.set ("assets/images/tileset.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("assets/images/titleParts.png", __ASSET__assets_images_titleparts_png);
 		type.set ("assets/images/titleParts.png", Reflect.field (AssetType, "image".toUpperCase ()));
@@ -648,6 +690,13 @@ class DefaultAssetLibrary extends AssetLibrary {
 #if pixi
 #elseif flash
 
+@:keep class __ASSET__assets_data_charactertest_json extends flash.utils.ByteArray { }
+@:keep class __ASSET__assets_data_leveltest_tmx extends flash.utils.ByteArray { }
+@:keep class __ASSET__assets_data_tileset_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_main_json extends flash.utils.ByteArray { }
+@:keep class __ASSET__assets_images_sprplayer_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_tileset_pdn extends flash.utils.ByteArray { }
+@:keep class __ASSET__assets_images_tileset_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_titleparts_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_sounds_beep_mp3 extends flash.media.Sound { }
 @:keep class __ASSET__assets_sounds_flixel_mp3 extends flash.media.Sound { }
@@ -660,9 +709,23 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
+
 #elseif (windows || mac || linux)
 
 
+@:file("assets/data/charactertest.json") class __ASSET__assets_data_charactertest_json extends flash.utils.ByteArray {}
+@:file("assets/data/leveltest.tmx") class __ASSET__assets_data_leveltest_tmx extends flash.utils.ByteArray {}
+@:bitmap("assets/data/tileset.png") class __ASSET__assets_data_tileset_png extends flash.display.BitmapData {}
+@:file("assets/images/main.json") class __ASSET__assets_images_main_json extends flash.utils.ByteArray {}
+@:bitmap("assets/images/sprPlayer.png") class __ASSET__assets_images_sprplayer_png extends flash.display.BitmapData {}
+@:file("assets/images/tileset.pdn") class __ASSET__assets_images_tileset_pdn extends flash.utils.ByteArray {}
+@:bitmap("assets/images/tileset.png") class __ASSET__assets_images_tileset_png extends flash.display.BitmapData {}
 @:bitmap("assets/images/titleParts.png") class __ASSET__assets_images_titleparts_png extends flash.display.BitmapData {}
 @:sound("E:/Haxe/haxe/lib/flixel/3,3,0/assets/sounds/beep.mp3") class __ASSET__assets_sounds_beep_mp3 extends flash.media.Sound {}
 @:sound("E:/Haxe/haxe/lib/flixel/3,3,0/assets/sounds/flixel.mp3") class __ASSET__assets_sounds_flixel_mp3 extends flash.media.Sound {}

@@ -21,6 +21,7 @@ class MenuState extends FlxState
 	{
 		var alignX:Int = Std.int(FlxG.width / 2);
 		
+		trace("created");
 		//TODO add opening sound
 		
 		//add the title
@@ -37,21 +38,24 @@ class MenuState extends FlxState
 		parts.setYSpeed( -200, -20);
 		parts.setRotation( -720, 720);
 		parts.gravity = 100;
-		parts.makeParticles(Reg.titleParts, 650, 32, true, 0);
+		//parts.makeParticles(Reg.titleParts, 650, 32, true, 0);
 		add(parts);
 		
 		//add the 'play'
 		playText = new FlxText(1, titleText.x + 30, 0, "Play Game", 15);
 		playText.x = alignX - (playText.width / 2);
-		playText.color = 0x729954;
+		playText.color = FlxColor.WHITE;
 		playText.alignment = "centre";
 		add(playText);
 		
 		//add the button
-		playButton = new FlxButton(1, 1, "Begin", onPlay);
+		playButton = new FlxButton(1, titleText.x + 3, "Begin", onPlay);
+		playButton.width = 100;
+		playButton.height = 50;
 		playButton.x = alignX - (playButton.width / 2);
 		playButton.color = 0x729954;
 		playButton.label.color = 0x009954;
+		//playButton.visible = false;
 		add(playButton);
 		
 		super.create();
@@ -69,7 +73,7 @@ class MenuState extends FlxState
 	override public function update():Void
 	{
 		super.update();
-		parts.start(true, 5);
+		//parts.start(true, 5);
 		//TODO Put in attract mode or something if I've got time
 	}
 	
@@ -82,6 +86,8 @@ class MenuState extends FlxState
 	private function fadeOut():Void
 	{
 		FlxG.camera.fade(FlxColor.BLACK, 1, false);
+		trace("fading out");
 		FlxG.switchState(new PlayState());
+		
 	}
 }

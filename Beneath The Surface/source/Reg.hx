@@ -8,8 +8,8 @@ class Reg
 {
 
 	public static inline var titleParts:String = "assets/images/titleParts.png";
-	
-	
+	public static var player:Character;
+	public static var zoomLevel:Float = 3;
 	
 	public static var levels:Array<Dynamic> = [];
 	public static var level:Int = 0;
