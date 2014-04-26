@@ -4,9 +4,8 @@
 -lib flixel-addons
 -cp source
 -D tools=1.4.0
--D FLX_NO_DEBUG
--D NAPE_RELEASE_BUILD
 -D FLX_RENDER_BLIT
+-D fdb
 -D web
 -swf-version 11.8
 -swf export/flash/bin/BeneathTheSurface.swf

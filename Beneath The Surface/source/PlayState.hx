@@ -16,6 +16,15 @@ class PlayState extends FlxState
 	
 	//TODO get rid of this shite
 	
+	//TODO Add weapons
+	//TODO Add enemies
+	//TODO Expand overworld tileset
+	//TODO Animate main character
+	//TODO Fix roll animation handle
+	//TODO Fix Titlescreen
+	//TODO Add sound
+	//TODO Add music
+	
 	public var shrines:FlxGroup;
 	public var player:Character;
 	public var floor:FlxObject;
@@ -31,10 +40,10 @@ class PlayState extends FlxState
 		testmap = new TiledLevel("assets/data/leveltest.tmx");
 		add(testmap.backgroundTiles);
 		add(testmap.foregroundTiles);
-		testmap.loadObjects(this);
-		
 		shrines = new FlxGroup();
 		add(shrines);
+		testmap.loadObjects(this);
+	
 
 		//add(Reg.player);
 
@@ -42,10 +51,6 @@ class PlayState extends FlxState
 		FlxG.camera.width = Std.int(FlxG.camera.width / Reg.zoomLevel);
 		FlxG.camera.height = Std.int(FlxG.camera.height / Reg.zoomLevel);
 		FlxG.camera.follow(player);
-			
-		
-		lol = new Shrine(player.x, player.y);
-		add(lol);
 		
 		player.controllable = true;
 		
@@ -59,8 +64,7 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		testmap.collideWithLevel(player);
-		shrines.callAll("checkActivation", [player, this], true);	
-		lol.checkActivation(player, this);
+		shrines.callAll("checkActivation", [player, this], true);
 		super.update();	
 	}
 }

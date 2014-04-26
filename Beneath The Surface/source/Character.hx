@@ -100,8 +100,7 @@ class Character extends FlxExtendedSprite
 				}
 			}	
 		}
-		//TODO add checkBoundsMap function in
-		//checkBoundsMap();
+		checkBoundsMap();
 		doAnimation();
 		super.update();
 	}

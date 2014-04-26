@@ -130,8 +130,8 @@ class TiledLevel extends TiledMap
 			case "shrine":
 				trace("adding shrine");
 				//var tileset = g.map.getGidOwner(o.gid);
-				//var shrine = new Shrine(x,y);
-				//state.shrines.add(shrine);
+				var shrine = new Shrine(x,y);
+				state.shrines.add(shrine);
 
 			case "exit":
 				// Create the level exit
