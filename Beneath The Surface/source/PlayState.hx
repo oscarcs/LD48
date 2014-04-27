@@ -12,6 +12,8 @@ import flixel.FlxObject;
 import flixel.group.FlxGroup;
 import flixel.util.FlxCollision;
 import flixel.util.FlxRect;
+import flixel.util.FlxColor;
+import flixel.util.FlxPoint;
 
 class PlayState extends FlxState
 {
@@ -20,24 +22,29 @@ class PlayState extends FlxState
 	
 	//TODO get rid of this shite
 	
-	//TODO Add weapons
-	//TODO Add enemies
-	//TODO Expand overworld tileset
 	//TODO Animate main character
 	//TODO Fix roll animation handle
 	//TODO Fix Titlescreen
 	//TODO Add sound
 	//TODO Add music
+	//TODO design level
 	
 	public var shrines:FlxGroup;
 	public var shrubs:FlxGroup;
 	public var pillars:FlxGroup;
 	public var mounds:FlxGroup;
+	
 	public var arrows:FlxGroup;
+	
+	public var faithBar:FlxGroup;
+	private var faithMeter:FlxSprite;
+	public var overlay:UI;
+	
 	public var player:Character;
 	public var floor:FlxObject;
 	public var exit:FlxSprite;	
-	public var overlay:UI;
+
+
 	//private var lol:Weapon;
 	private var world = new FlxRect(0, 0, 1600, 1600);
 	//private var testSkelly:Skeleton;
@@ -49,7 +56,7 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		trace("creating");
+		//trace("creating");
 		//Reg.player
 	
 		testmap = new TiledLevel("assets/data/leveltest.tmx");
@@ -115,7 +122,31 @@ class PlayState extends FlxState
 		overlay.add(overlay.CText);
 		overlay.add(overlay.XText);
 		overlay.add(overlay.ZText);
-		add(overlay);
+		//add(overlay);
+		
+		//adding some good ol' faith
+		faithBar = new FlxGroup();
+		
+		var faithBG = new FlxSprite(115, 30);
+		faithBG.scrollFactor.x = 0;
+		faithBG.scrollFactor.y = 0;
+		faithBG.loadGraphic("assets/images/faithbg.png", false);
+		//var midBG:FlxPoint
+		faithBar.add(faithBG);
+		
+		//trace(faithBG.x + faithBG.y);
+		
+		faithMeter = new FlxSprite(115, 30);
+		faithMeter.scrollFactor.x = 0;
+		faithMeter.scrollFactor.y = 0;
+		faithMeter.makeGraphic(1, 10, FlxColor.WHITE);
+		//faithMeter.origin.x = faithMeter.origin.y = 0;
+		faithMeter.scale.x = 180;
+
+		faithBar.add(faithMeter);
+		
+		add(faithBar);
+		
 		
 		
 		//THIS IS IMPORTANT
@@ -133,14 +164,23 @@ class PlayState extends FlxState
 
 	override public function update():Void
 	{
+		if (Reg.player.faith > 0)
+		{
+			Reg.player.faith -= 0.03;
+		}
+		faithMeter.scale.x = Reg.player.faith;
+		
 		//testmap.collideWithLevel(Reg.player);
 		//testmap.collideWithLevel(Reg.enemyGroup);
 		
 		collideStuff();
 		
 		//lazer.bulletsOverlap(shrines, destroyBullet())
+		
 		shrines.callAll("checkActivation", [Reg.player, this], true);
 		pillars.callAll("checkActivation", [Reg.player, this], true);
+
+		
 		mounds.callAll("revealMound", [Reg.player, this], true);
 		//FlxG.collide(player, shrines);
 		
@@ -150,9 +190,11 @@ class PlayState extends FlxState
 		}
 		
 		
-		if (FlxG.keys.anyPressed(["C"]))
+		if (FlxG.keys.anyPressed(["C"]) && Reg.player.faith > 1 )
 		{
 			//FlxG.camera.zoom = Reg.zoomLevel;
+			Reg.player.faith -= 0.2;
+			
 			
 			switch(Reg.player.facing)
 			{

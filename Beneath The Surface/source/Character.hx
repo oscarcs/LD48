@@ -26,13 +26,14 @@ class Character extends FlxExtendedSprite
 	public var anim:String;
 	public var rolling:Bool = false;
 	public var rollTimer:Float = 0;
+	public var faith:Float = 0;
 	//public var message:Message;
 	
 	public function new(X:Float, Y:Float, ?JsonPath:String, ?SimpleGraphic:Dynamic) 
 	{
 		super(x, y, SimpleGraphic);
 		parseJson(JsonPath);
-		trace("created character");
+		//trace("created character");
 		this.facing = FlxObject.DOWN;
 		
 		this.health = 10;
@@ -56,7 +57,7 @@ class Character extends FlxExtendedSprite
 		
 		if (rolling == true)
 		{
-			trace("rolling. RollTimer: " + rollTimer);
+			//trace("rolling. RollTimer: " + rollTimer);
 			rollTimer += FlxG.elapsed;
 		}
 		
@@ -225,7 +226,7 @@ class Character extends FlxExtendedSprite
 
 		
 		var json = haxe.Json.parse(fileString);
-		trace("JSON parse OK!");
+		//trace("JSON parse OK!");
 		
 		//get and set the texture file
 		var texture:String = filePath.dir + "/" + json.sprite.texture;
@@ -233,14 +234,14 @@ class Character extends FlxExtendedSprite
 		var frameHeight:Int = json.sprite.frameheight;
 		//this.loadGraphic(texture, true, false, frameWidth, frameHeight);
 		this.loadGraphic(texture, true, frameWidth, frameHeight);
-		trace("texture OK!");
+		//trace("texture OK!");
 		
 		//get and set the character's velocities
 		var xmax:Int = json.velocity.xmax;
 		var ymax:Int = json.velocity.ymax;
 		this.maxVelocity.x = xmax;
 		this.maxVelocity.y = ymax;
-		trace("velocity OK!");
+		//trace("velocity OK!");
 		
 		//get and set the character's collision mask
 		var col_x:Int = json.collision.x;
@@ -248,7 +249,7 @@ class Character extends FlxExtendedSprite
 		var col_width:Int = json.collision.width;
 		var col_height:Int = json.collision.height;
 		collisionMap = new FlxRect(col_x, col_y, col_width, col_height);
-		trace("collision OK!");
+		//trace("collision OK!");
 
 		//add dialog text
 		//TODO fix the fact that this is a cheeky hack because I don't understand Haxe.Reflect
@@ -271,7 +272,7 @@ class Character extends FlxExtendedSprite
 		var vel_idle:Int = json.animation.framerate.idle;
 		var vel_walking:Int = json.animation.framerate.walking;
 		var vel_rolling:Int = json.animation.framerate.rolling;
-		trace("animation OK!");
+		//trace("animation OK!");
 		
 		//go through and add all the animations
 		//form is type_direction

@@ -60,6 +60,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/arrowUp.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/images/bow.png", __ASSET__assets_images_bow_png);
 		type.set ("assets/images/bow.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("assets/images/faithbg.png", __ASSET__assets_images_faithbg_png);
+		type.set ("assets/images/faithbg.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/images/main.json", __ASSET__assets_images_main_json);
 		type.set ("assets/images/main.json", Reflect.field (AssetType, "text".toUpperCase ()));
 		className.set ("assets/images/mound.png", __ASSET__assets_images_mound_png);
@@ -102,6 +104,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		addExternal("assets/images/arrowRight.png", "image", "assets/images/arrowRight.png");
 		addExternal("assets/images/arrowUp.png", "image", "assets/images/arrowUp.png");
 		addExternal("assets/images/bow.png", "image", "assets/images/bow.png");
+		addExternal("assets/images/faithbg.png", "image", "assets/images/faithbg.png");
 		addExternal("assets/images/main.json", "text", "assets/images/main.json");
 		addExternal("assets/images/mound.png", "image", "assets/images/mound.png");
 		addExternal("assets/images/newArrow.png", "image", "assets/images/newArrow.png");
@@ -158,6 +161,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("assets/images/bow.png", __ASSET__assets_images_bow_png);
 		type.set ("assets/images/bow.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("assets/images/faithbg.png", __ASSET__assets_images_faithbg_png);
+		type.set ("assets/images/faithbg.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("assets/images/main.json", __ASSET__assets_images_main_json);
 		type.set ("assets/images/main.json", Reflect.field (AssetType, "text".toUpperCase ()));
@@ -792,6 +798,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__assets_images_arrowright_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_arrowup_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_bow_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_faithbg_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_main_json extends flash.utils.ByteArray { }
 @:keep class __ASSET__assets_images_mound_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_newarrow_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -836,6 +843,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
 #elseif (windows || mac || linux)
 
 
@@ -851,6 +859,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:bitmap("assets/images/arrowRight.png") class __ASSET__assets_images_arrowright_png extends flash.display.BitmapData {}
 @:bitmap("assets/images/arrowUp.png") class __ASSET__assets_images_arrowup_png extends flash.display.BitmapData {}
 @:bitmap("assets/images/bow.png") class __ASSET__assets_images_bow_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/faithbg.png") class __ASSET__assets_images_faithbg_png extends flash.display.BitmapData {}
 @:file("assets/images/main.json") class __ASSET__assets_images_main_json extends flash.utils.ByteArray {}
 @:bitmap("assets/images/mound.png") class __ASSET__assets_images_mound_png extends flash.display.BitmapData {}
 @:bitmap("assets/images/newArrow.png") class __ASSET__assets_images_newarrow_png extends flash.display.BitmapData {}

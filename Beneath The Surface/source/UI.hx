@@ -19,18 +19,16 @@ class UI extends FlxGroup
 	
 	public function new() 
 	{
-		var start = Reg.player;
-		
-		var spacing:Int = 30;
+		var spacing:Int = 15;
 		var lead:Int = FlxG.camera.height -60;
 		/*
 		ZText = new FlxText(60 + start.x, lead + start.y, 0, "Z", 20);
 		XText = new FlxText(ZText.x + spacing, lead + start.y, 0, "X", 20);
 		CText = new FlxText(XText.x + spacing, lead + start.y, 0, "C", 20);
 		*/
-		ZText = new FlxText(start.x, start.y, 0, "Z", 20);
-		XText = new FlxText(ZText.x, start.y, 0, "X", 20);
-		CText = new FlxText(XText.x, start.y, 0, "C", 20);
+		ZText = new FlxText(spacing, 23, 0, "Z", 16);
+		XText = new FlxText(ZText.x + spacing, 23, 0, "X", 16);
+		CText = new FlxText(XText.x + spacing, 23, 0, "C", 16);
 		
 		ZText.scrollFactor.x = 0;
 		XText.scrollFactor.x = 0;
@@ -40,9 +38,7 @@ class UI extends FlxGroup
 		XText.scrollFactor.y = 0;
 		CText.scrollFactor.y = 0;	
 		
-		trace("ZTEXT: " + ZText.x +"  " + ZText.y);
-		trace("START: " + start.x +"  " + start.y);
-		
+		//trace("ZTEXT: " + ZText.x +"  " + ZText.y);
 		super();
 	}
 	

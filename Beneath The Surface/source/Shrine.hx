@@ -42,10 +42,11 @@ class Shrine extends FlxExtendedSprite
 			var distance = FlxMath.getDistance(p1, p2);
 			if (distance < 50 && isActivated == false)
 			{
+				Reg.player.faith += 10;
 				activate();
-			}
-			
+			}	
 		}
+
 		
 		
 		

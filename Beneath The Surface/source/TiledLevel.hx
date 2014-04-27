@@ -85,7 +85,7 @@ class TiledLevel extends TiledMap
 				collidableTileLayers.push(tilemap);
 			}
 		}
-		trace("added tilemaps");
+		//trace("added tilemaps");
 	}
 
 	public function loadObjects(state:PlayState)
@@ -97,7 +97,7 @@ class TiledLevel extends TiledMap
 				loadObject(o, group, state);
 			}
 		}
-		trace("loaded objects");
+		//trace("loaded objects");
 	}
 
 	
@@ -119,7 +119,7 @@ class TiledLevel extends TiledMap
 				Reg.player = player;
 				state.add(Reg.player);
 				FlxG.camera.follow(Reg.player);
-				trace("adding character");
+				//trace("adding character");
 				
 			case "floor":
 				//not really useful unless it's a platformer.

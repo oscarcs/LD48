@@ -21,9 +21,9 @@ class Mound extends FlxExtendedSprite
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		trace("adding mound");
+		//trace("adding mound");
 		this.loadGraphic("assets/images/mound.png", true, 16, 32);
-		trace("loaded graphic");
+		//trace("loaded graphic");
 		this.animation.add("static", [0], 0, true);
 		this.animation.add("reveal", [0, 1, 2, 3, 4], 10, false);
 		this.animation.add("poststatic", [5], 0, true);

@@ -21,7 +21,7 @@ class MenuState extends FlxState
 	{
 		var alignX:Int = Std.int(FlxG.width / 2);
 		
-		trace("created");
+		trace("Beneath the Surface Build 1");
 		//TODO add opening sound
 		
 		//add the title
@@ -42,7 +42,7 @@ class MenuState extends FlxState
 		add(parts);
 		
 		//add the 'play'
-		playText = new FlxText(1, titleText.x + 30, 0, "Play Game", 15);
+		playText = new FlxText(1, titleText.x + 30, 0, "C: Shoot, Z:Pray, X:Roll(Unimplemented)", 15);
 		playText.x = alignX - (playText.width / 2);
 		playText.color = FlxColor.WHITE;
 		playText.alignment = "centre";
@@ -86,7 +86,7 @@ class MenuState extends FlxState
 	private function fadeOut():Void
 	{
 		FlxG.camera.fade(FlxColor.BLACK, 1, false);
-		trace("fading out");
+		//trace("fading out");
 		FlxG.switchState(new PlayState());
 		
 	}
