@@ -27,7 +27,7 @@ class TiledLevel extends TiledMap
 	// Array of tilemaps used for collision
 	public var foregroundTiles:FlxGroup;
 	public var backgroundTiles:FlxGroup;
-	private var collidableTileLayers:Array<FlxTilemap>;
+	public var collidableTileLayers:Array<FlxTilemap>;
 
 	public function new(tiledLevel:Dynamic)
 	{
@@ -115,11 +115,10 @@ class TiledLevel extends TiledMap
 		switch (o.type.toLowerCase())
 		{
 			case "playerstart":
-				//create a character. Might be easier to add a reference to the player in the Reg class.
 				var player = new Character(o.x, o.y, "assets/data/testplayer.json");
-				state.player = player;
-				state.add(player);
-				FlxG.camera.follow(player);
+				Reg.player = player;
+				state.add(Reg.player);
+				FlxG.camera.follow(Reg.player);
 				trace("adding character");
 				
 			case "floor":
@@ -134,6 +133,30 @@ class TiledLevel extends TiledMap
 				shrine.solid = true;
 				shrine.immovable = true;
 				state.shrines.add(shrine);
+				
+			case "mound":
+				//trace("adding mound");
+				//var tileset = g.map.getGidOwner(o.gid);
+				var mound = new Mound(x, y);
+				mound.solid = false;
+				mound.immovable = true;
+				state.mounds.add(mound);
+				
+			case "pillar":
+				//trace("adding pillar");
+				//var tileset = g.map.getGidOwner(o.gid);
+				var pillar = new Pillar(x,y);
+				pillar.solid = true;
+				pillar.immovable = true;
+				state.pillars.add(pillar);
+				
+			case "shrub":
+				//trace("adding shrub");
+				//var tileset = g.map.getGidOwner(o.gid);
+				var shrub = new Shrub(x,y);
+				shrub.solid = false;
+				shrub.immovable = true;
+				state.shrubs.add(shrub);	
 
 			case "exit":
 				// Create the level exit
@@ -141,7 +164,7 @@ class TiledLevel extends TiledMap
 				exit.makeGraphic(32, 32, 0xff3f3f3f);
 				exit.exists = false;
 				state.exit = exit;
-				state.add(exit);
+				state.add(exit);			
 		}
 	}
 

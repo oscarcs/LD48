@@ -30,12 +30,17 @@ class PlayState extends FlxState
 	//TODO Add music
 	
 	public var shrines:FlxGroup;
+	public var shrubs:FlxGroup;
+	public var pillars:FlxGroup;
+	public var mounds:FlxGroup;
 	public var arrows:FlxGroup;
 	public var player:Character;
 	public var floor:FlxObject;
 	public var exit:FlxSprite;	
+	public var overlay:UI;
 	//private var lol:Weapon;
 	private var world = new FlxRect(0, 0, 1600, 1600);
+	private var testSkelly:Skeleton;
 	
 	private var bow:FlxWeapon;
 	private var lazer:FlxWeapon;
@@ -50,23 +55,36 @@ class PlayState extends FlxState
 		testmap = new TiledLevel("assets/data/leveltest.tmx");
 		add(testmap.backgroundTiles);
 		add(testmap.foregroundTiles);
+		
 		shrines = new FlxGroup();
 		add(shrines);
+		
+		shrubs = new FlxGroup();
+		add(shrubs);
+		
+		pillars = new FlxGroup();
+		add(pillars);
+		
+		mounds = new FlxGroup();
+		add(mounds);
+		
 		testmap.loadObjects(this);
 
 		//add(Reg.player);
 
+		//Reg.enemyGroup = new FlxGroup();
+		
 		FlxG.camera.zoom = Reg.zoomLevel;
 		FlxG.camera.width = Std.int(FlxG.camera.width / Reg.zoomLevel);
 		FlxG.camera.height = Std.int(FlxG.camera.height / Reg.zoomLevel);
-		FlxG.camera.follow(player);
+		FlxG.camera.follow(Reg.player);
 		
 		//lol = new Weapon(player.x, player.x, player, 16);
 		//add(lol);
 		
 		//add(arrows);
 		
-		player.controllable = true;
+		Reg.player.controllable = true;
 		
 		
 		
@@ -78,7 +96,7 @@ class PlayState extends FlxState
 		//testBow.setBulletDirection(
 		
 		//TODO Rename the weapon
-		lazer= new FlxWeapon("lazer", player);
+		lazer= new FlxWeapon("lazer", Reg.player);
 		//lazer.makePixelBullet(50, 5, 5);
 		lazer.makeImageBullet(500, "assets/images/newArrow.png", 0, 0, true, 360);
 		lazer.setBulletDirection(FlxWeapon.BULLET_UP, 200);
@@ -88,16 +106,23 @@ class PlayState extends FlxState
 		lazer.setBulletBounds(world);
 		lazer.setFireRate(10);
 		
+		//testSkelly = new Skeleton(Reg.player.x, Reg.player.y);
+		//Reg.enemyGroup.maxSize = 30;
+		//Reg.enemyGroup.add(testSkelly);
+		//add(Reg.enemyGroup);
 		
 		
-		
+		//TODO Fix this
+		//THIS BREAKS COLLISIONS WHAT THE HELL SERIOUSLY WHAT'S UP WITH THAT
+		//overlay = new UI(player);
+		//add(overlay);
 		
 		
 		//THIS IS IMPORTANT
-		//FIX IT LATER
+		//DON'T FORGET IT
 		//OR YOU WILL DIE
 		//A SLOW, PAINFUL, DEATH
-		FlxG.worldBounds.set(0,0,1600,1600);
+		FlxG.worldBounds.set(0, 0, 1600, 1600);
 		
 	}
 
@@ -108,20 +133,31 @@ class PlayState extends FlxState
 
 	override public function update():Void
 	{
-		testmap.collideWithLevel(player);
+		//testmap.collideWithLevel(Reg.player);
+		//testmap.collideWithLevel(Reg.enemyGroup);
+		
+		collideStuff();
+		
 		//lazer.bulletsOverlap(shrines, destroyBullet())
-		shrines.callAll("checkActivation", [player, this], true);
+		shrines.callAll("checkActivation", [Reg.player, this], true);
+		pillars.callAll("checkActivation", [Reg.player, this], true);
+		mounds.callAll("revealMound", [Reg.player, this], true);
 		//FlxG.collide(player, shrines);
 		
-		//if (FlxG.keys.anyPressed(["C"]))
-		//{
-		//	lol.drawWeapon();
-		//}
+		if (FlxG.keys.anyJustReleased(["A"]))
+		{
+			testSkelly.hurtPlayer();
+			trace(Reg.player.health);
+		}
+		
+		
 		if (FlxG.keys.anyPressed(["C"]))
 		{
+			//FlxG.camera.zoom = Reg.zoomLevel;
 			
-			switch(player.facing)
+			switch(Reg.player.facing)
 			{
+
 				case FlxObject.LEFT:
 					lazer.fireFromAngle(180);
 					//lazer.setBulletDirection(FlxWeapon.BULLET_LEFT, 400);
@@ -143,14 +179,28 @@ class PlayState extends FlxState
 			
 			
 			//lazer.fireFromParentAngle();
-			trace("firing");
+			FlxG.camera.shake(0.005, 0.05);
+			//trace("firing");
 		}
 		
-		//lol.x = player.x;
-		//lol.y = player.y;
+		
+		
 		//trace("gun: X: " + lol.x + " Y: " + lol.y);
-		//trace("player: X: " + player.x + " Y: " + player.y);
+		//trace("player: X: " + Reg.player.x + " Y: " + Reg.player.y);
 		
 		super.update();	
+	}
+	
+	private function collideStuff()
+	{
+		if (testmap.collidableTileLayers != null)
+		{
+			for (map in testmap.collidableTileLayers)
+			{
+				FlxG.overlap(map, Reg.player, FlxObject.separate);
+				FlxG.overlap(map, Reg.enemyGroup, FlxObject.separate);
+
+			}
+		}
 	}
 }

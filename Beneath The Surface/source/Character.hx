@@ -35,6 +35,8 @@ class Character extends FlxExtendedSprite
 		trace("created character");
 		this.facing = FlxObject.DOWN;
 		
+		this.health = 10;
+		
 		this.x = X;
 		this.y = Y;
 		
@@ -104,6 +106,12 @@ class Character extends FlxExtendedSprite
 		}
 		checkBoundsMap();
 		doAnimation();
+		
+		if (this.health <= 0)
+		{
+			FlxG.switchState(new PlayState());
+		}
+		
 		super.update();
 	}
 	
@@ -144,8 +152,7 @@ class Character extends FlxExtendedSprite
 	//TODO rewrite doAnimation so it's agnostic for topdown, 2.5D, and side-scrolling
 	private function doAnimation()
 	{
-		//TODO add the roll animation type
-		
+		//TODO add images for the roll		
 		anim = "idle_";
 		//find the type of motion we're doing and add it to anim
 		if (velocity.y != 0 || velocity.x != 0)
