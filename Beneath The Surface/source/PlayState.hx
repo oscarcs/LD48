@@ -40,7 +40,7 @@ class PlayState extends FlxState
 	public var overlay:UI;
 	//private var lol:Weapon;
 	private var world = new FlxRect(0, 0, 1600, 1600);
-	private var testSkelly:Skeleton;
+	//private var testSkelly:Skeleton;
 	
 	private var bow:FlxWeapon;
 	private var lazer:FlxWeapon;
@@ -72,7 +72,7 @@ class PlayState extends FlxState
 
 		//add(Reg.player);
 
-		//Reg.enemyGroup = new FlxGroup();
+		Reg.enemyGroup = new FlxGroup();
 		
 		FlxG.camera.zoom = Reg.zoomLevel;
 		FlxG.camera.width = Std.int(FlxG.camera.width / Reg.zoomLevel);
@@ -107,15 +107,15 @@ class PlayState extends FlxState
 		lazer.setFireRate(10);
 		
 		//testSkelly = new Skeleton(Reg.player.x, Reg.player.y);
-		//Reg.enemyGroup.maxSize = 30;
+		Reg.enemyGroup.maxSize = 30;
 		//Reg.enemyGroup.add(testSkelly);
-		//add(Reg.enemyGroup);
+		add(Reg.enemyGroup);
 		
-		
-		//TODO Fix this
-		//THIS BREAKS COLLISIONS WHAT THE HELL SERIOUSLY WHAT'S UP WITH THAT
-		//overlay = new UI(player);
-		//add(overlay);
+		overlay = new UI();
+		overlay.add(overlay.CText);
+		overlay.add(overlay.XText);
+		overlay.add(overlay.ZText);
+		add(overlay);
 		
 		
 		//THIS IS IMPORTANT
@@ -146,7 +146,6 @@ class PlayState extends FlxState
 		
 		if (FlxG.keys.anyJustReleased(["A"]))
 		{
-			testSkelly.hurtPlayer();
 			trace(Reg.player.health);
 		}
 		
@@ -193,14 +192,29 @@ class PlayState extends FlxState
 	
 	private function collideStuff()
 	{
+		FlxG.collide(Reg.enemyGroup, Reg.enemyGroup, FlxObject.separate);
+		
+		FlxG.overlap(Reg.enemyGroup, lazer.group, collideBullet);
+		
 		if (testmap.collidableTileLayers != null)
 		{
 			for (map in testmap.collidableTileLayers)
 			{
 				FlxG.overlap(map, Reg.player, FlxObject.separate);
 				FlxG.overlap(map, Reg.enemyGroup, FlxObject.separate);
-
 			}
 		}
+	}	
+	
+	private function collideBullet(enemy:Skeleton, bullet:FlxBullet)
+	{
+		bullet.kill();
+		enemy.health -= 1;
+		if (enemy.health <= 0)
+		{
+			enemy.kill();
+		}
 	}
+	
+	
 }

@@ -13,12 +13,14 @@ import flixel.FlxSprite;
 class UI extends FlxGroup
 {
 
-	private var XText:FlxText;
-	private var ZText:FlxText;
-	private var CText:FlxText;
+	public var XText:FlxText;
+	public var ZText:FlxText;
+	public var CText:FlxText;
 	
-	public function new(start:FlxSprite) 
+	public function new() 
 	{
+		var start = Reg.player;
+		
 		var spacing:Int = 30;
 		var lead:Int = FlxG.camera.height -60;
 		/*
@@ -33,16 +35,13 @@ class UI extends FlxGroup
 		ZText.scrollFactor.x = 0;
 		XText.scrollFactor.x = 0;
 		CText.scrollFactor.x = 0;
+		
 		ZText.scrollFactor.y = 0;
 		XText.scrollFactor.y = 0;
 		CText.scrollFactor.y = 0;	
 		
 		trace("ZTEXT: " + ZText.x +"  " + ZText.y);
 		trace("START: " + start.x +"  " + start.y);
-
-		this.add(ZText);
-		this.add(XText);
-		this.add(CText);
 		
 		super();
 	}

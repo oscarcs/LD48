@@ -2,6 +2,7 @@ package ;
 
 import flixel.util.FlxVelocity;
 import flixel.FlxG;
+import flixel.FlxObject;
 
 /**
  * ...
@@ -21,7 +22,11 @@ class Skeleton extends Character
 	{
 		FlxVelocity.moveTowardsObject(this, Reg.player, 60);
 		
-		FlxG.collide(this, Reg.player);
+		if (FlxG.collide(this, Reg.player))
+		{
+			FlxObject.separate(this, Reg.player);
+			hurtPlayer();
+		}
 		
 		checkBoundsMap();
 		doAnimation();
@@ -30,7 +35,6 @@ class Skeleton extends Character
 		{
 			this.kill();
 		}
-		
 		
 		super.update();
 	}

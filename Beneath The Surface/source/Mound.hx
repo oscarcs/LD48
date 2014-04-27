@@ -40,6 +40,9 @@ class Mound extends FlxExtendedSprite
 		{
 			animation.play("reveal");
 			isActivated = true;
+		}
+		if (this.animation.finished)
+		{
 			spawnMonster();
 		}
 	}
@@ -48,8 +51,9 @@ class Mound extends FlxExtendedSprite
 	{
 		//var spawn = new Skeleton(this.x, this.y);
 		//Reg.enemyGroup.add(spawn);
-		
-		Reg.enemyGroup.recycle(Skeleton, [this.x, this.y]);
-		FlxG.camera.shake(0.005, 0.05);
+
+			Reg.enemyGroup.recycle(Skeleton, [this.x, this.y]);
+			FlxG.camera.shake(0.005, 0.05);
+			this.animation.play("poststatic");
 	}
 }
