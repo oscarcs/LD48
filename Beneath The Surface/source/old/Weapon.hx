@@ -1,4 +1,4 @@
-package ;
+package shitey weapon stuff ;
 
 import flixel.FlxSprite;
 import flixel.FlxG;
@@ -62,7 +62,7 @@ class Weapon extends FlxSprite
 		if (isDrawing == true)
 		{
 			chargeTimer += FlxG.elapsed;
-			trace(chargeTimer);
+			//trace(chargeTimer);
 		}
 		
 		chargeAmount = chargeTimer * 10;
@@ -76,11 +76,13 @@ class Weapon extends FlxSprite
 		
 	}
 	
-	public function fire()
+	public function fire(state:PlayState)
 	{
 		if (cooldownTimer > 0.6 && isFiring == false && isDrawing == true)
 		{
-			//arrow:Arrow = new Arrow(this.x, this.y, chargeAmount, facing);
+			var arrow = new Arrow(this.x, this.y, chargeAmount, facing);
+			trace("arrow created");
+			state.arrows.add(arrow);
 			cooldownTimer = 0;
 			chargeTimer = 0;
 			isDrawing = false;

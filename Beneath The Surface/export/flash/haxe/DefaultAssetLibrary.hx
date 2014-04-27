@@ -46,10 +46,22 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/testplayer.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/data/tileset.png", __ASSET__assets_data_tileset_png);
 		type.set ("assets/data/tileset.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("assets/images/arrow.png", __ASSET__assets_images_arrow_png);
+		type.set ("assets/images/arrow.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("assets/images/arrowDown.png", __ASSET__assets_images_arrowdown_png);
+		type.set ("assets/images/arrowDown.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("assets/images/arrowLeft.png", __ASSET__assets_images_arrowleft_png);
+		type.set ("assets/images/arrowLeft.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("assets/images/arrowRight.png", __ASSET__assets_images_arrowright_png);
+		type.set ("assets/images/arrowRight.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		className.set ("assets/images/arrowUp.png", __ASSET__assets_images_arrowup_png);
+		type.set ("assets/images/arrowUp.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/images/bow.png", __ASSET__assets_images_bow_png);
 		type.set ("assets/images/bow.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/images/main.json", __ASSET__assets_images_main_json);
 		type.set ("assets/images/main.json", Reflect.field (AssetType, "text".toUpperCase ()));
+		className.set ("assets/images/newArrow.png", __ASSET__assets_images_newarrow_png);
+		type.set ("assets/images/newArrow.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/images/shrine.png", __ASSET__assets_images_shrine_png);
 		type.set ("assets/images/shrine.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		className.set ("assets/images/sprPlayer.png", __ASSET__assets_images_sprplayer_png);
@@ -75,8 +87,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 		addExternal("assets/data/testplayer.json", "text", "assets/data/testplayer.json");
 		addExternal("assets/data/testplayer.png", "image", "assets/data/testplayer.png");
 		addExternal("assets/data/tileset.png", "image", "assets/data/tileset.png");
+		addExternal("assets/images/arrow.png", "image", "assets/images/arrow.png");
+		addExternal("assets/images/arrowDown.png", "image", "assets/images/arrowDown.png");
+		addExternal("assets/images/arrowLeft.png", "image", "assets/images/arrowLeft.png");
+		addExternal("assets/images/arrowRight.png", "image", "assets/images/arrowRight.png");
+		addExternal("assets/images/arrowUp.png", "image", "assets/images/arrowUp.png");
 		addExternal("assets/images/bow.png", "image", "assets/images/bow.png");
 		addExternal("assets/images/main.json", "text", "assets/images/main.json");
+		addExternal("assets/images/newArrow.png", "image", "assets/images/newArrow.png");
 		addExternal("assets/images/shrine.png", "image", "assets/images/shrine.png");
 		addExternal("assets/images/sprPlayer.png", "image", "assets/images/sprPlayer.png");
 		addExternal("assets/images/tileset.pdn", "binary", "assets/images/tileset.pdn");
@@ -108,11 +126,29 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("assets/data/tileset.png", __ASSET__assets_data_tileset_png);
 		type.set ("assets/data/tileset.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
+		className.set ("assets/images/arrow.png", __ASSET__assets_images_arrow_png);
+		type.set ("assets/images/arrow.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("assets/images/arrowDown.png", __ASSET__assets_images_arrowdown_png);
+		type.set ("assets/images/arrowDown.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("assets/images/arrowLeft.png", __ASSET__assets_images_arrowleft_png);
+		type.set ("assets/images/arrowLeft.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("assets/images/arrowRight.png", __ASSET__assets_images_arrowright_png);
+		type.set ("assets/images/arrowRight.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
+		className.set ("assets/images/arrowUp.png", __ASSET__assets_images_arrowup_png);
+		type.set ("assets/images/arrowUp.png", Reflect.field (AssetType, "image".toUpperCase ()));
+		
 		className.set ("assets/images/bow.png", __ASSET__assets_images_bow_png);
 		type.set ("assets/images/bow.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("assets/images/main.json", __ASSET__assets_images_main_json);
 		type.set ("assets/images/main.json", Reflect.field (AssetType, "text".toUpperCase ()));
+		
+		className.set ("assets/images/newArrow.png", __ASSET__assets_images_newarrow_png);
+		type.set ("assets/images/newArrow.png", Reflect.field (AssetType, "image".toUpperCase ()));
 		
 		className.set ("assets/images/shrine.png", __ASSET__assets_images_shrine_png);
 		type.set ("assets/images/shrine.png", Reflect.field (AssetType, "image".toUpperCase ()));
@@ -725,8 +761,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__assets_data_testplayer_json extends flash.utils.ByteArray { }
 @:keep class __ASSET__assets_data_testplayer_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_data_tileset_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_arrow_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_arrowdown_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_arrowleft_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_arrowright_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_arrowup_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_bow_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_main_json extends flash.utils.ByteArray { }
+@:keep class __ASSET__assets_images_newarrow_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_shrine_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_sprplayer_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_tileset_pdn extends flash.utils.ByteArray { }
@@ -756,6 +798,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
 #elseif (windows || mac || linux)
 
 
@@ -764,8 +812,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:file("assets/data/testplayer.json") class __ASSET__assets_data_testplayer_json extends flash.utils.ByteArray {}
 @:bitmap("assets/data/testplayer.png") class __ASSET__assets_data_testplayer_png extends flash.display.BitmapData {}
 @:bitmap("assets/data/tileset.png") class __ASSET__assets_data_tileset_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/arrow.png") class __ASSET__assets_images_arrow_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/arrowDown.png") class __ASSET__assets_images_arrowdown_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/arrowLeft.png") class __ASSET__assets_images_arrowleft_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/arrowRight.png") class __ASSET__assets_images_arrowright_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/arrowUp.png") class __ASSET__assets_images_arrowup_png extends flash.display.BitmapData {}
 @:bitmap("assets/images/bow.png") class __ASSET__assets_images_bow_png extends flash.display.BitmapData {}
 @:file("assets/images/main.json") class __ASSET__assets_images_main_json extends flash.utils.ByteArray {}
+@:bitmap("assets/images/newArrow.png") class __ASSET__assets_images_newarrow_png extends flash.display.BitmapData {}
 @:bitmap("assets/images/shrine.png") class __ASSET__assets_images_shrine_png extends flash.display.BitmapData {}
 @:bitmap("assets/images/sprPlayer.png") class __ASSET__assets_images_sprplayer_png extends flash.display.BitmapData {}
 @:file("assets/images/tileset.pdn") class __ASSET__assets_images_tileset_pdn extends flash.utils.ByteArray {}
