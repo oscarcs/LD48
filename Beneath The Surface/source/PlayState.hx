@@ -18,16 +18,13 @@ import flixel.util.FlxPoint;
 class PlayState extends FlxState
 {
 	
-	public var testmap:TiledLevel;
-	
-	//TODO get rid of this shite
+	//public var Reg.testmap:TiledLevel;
 	
 	//TODO Animate main character
 	//TODO Fix roll animation handle
-	//TODO Fix Titlescreen
 	//TODO Add sound
 	//TODO Add music
-	//TODO design level
+	//TODO polish
 	
 	public var shrines:FlxGroup;
 	public var shrubs:FlxGroup;
@@ -39,6 +36,10 @@ class PlayState extends FlxState
 	public var faithBar:FlxGroup;
 	private var faithMeter:FlxSprite;
 	public var overlay:UI;
+	public var healthMeter:FlxSprite;
+	public var scoreText:FlxText;
+	
+	//public var heartGroup:FlxGroup;
 	
 	public var player:Character;
 	public var floor:FlxObject;
@@ -49,8 +50,8 @@ class PlayState extends FlxState
 	private var world = new FlxRect(0, 0, 1600, 1600);
 	//private var testSkelly:Skeleton;
 	
+	//private var bow:FlxWeapon;
 	private var bow:FlxWeapon;
-	private var lazer:FlxWeapon;
 	private var bulletType:FlxBullet;
 	
 	override public function create():Void
@@ -59,9 +60,11 @@ class PlayState extends FlxState
 		//trace("creating");
 		//Reg.player
 	
-		testmap = new TiledLevel("assets/data/leveltest.tmx");
-		add(testmap.backgroundTiles);
-		add(testmap.foregroundTiles);
+		fadeIn();
+		
+		Reg.testmap = new TiledLevel("assets/data/newlevel.tmx");
+		add(Reg.testmap.backgroundTiles);
+		add(Reg.testmap.foregroundTiles);
 		
 		shrines = new FlxGroup();
 		add(shrines);
@@ -75,7 +78,7 @@ class PlayState extends FlxState
 		mounds = new FlxGroup();
 		add(mounds);
 		
-		testmap.loadObjects(this);
+		Reg.testmap.loadObjects(this);
 
 		//add(Reg.player);
 
@@ -102,16 +105,15 @@ class PlayState extends FlxState
 		//testBow.makeImageBullet(50, "assets/images/bow.png", 0, 0, false, 4, 0, false);
 		//testBow.setBulletDirection(
 		
-		//TODO Rename the weapon
-		lazer= new FlxWeapon("lazer", Reg.player);
+		bow = new FlxWeapon("lazer", Reg.player);
 		//lazer.makePixelBullet(50, 5, 5);
-		lazer.makeImageBullet(500, "assets/images/newArrow.png", 0, 0, true, 360);
-		lazer.setBulletDirection(FlxWeapon.BULLET_UP, 200);
-		lazer.setBulletRandomFactor(10, 20);
-		lazer.setBulletSpeed(200);
-		add(lazer.group);
-		lazer.setBulletBounds(world);
-		lazer.setFireRate(10);
+		bow.makeImageBullet(500, "assets/images/newArrow.png", 0, 0, true, 360);
+		bow.setBulletDirection(FlxWeapon.BULLET_UP, 200);
+		bow.setBulletRandomFactor(10, 20);
+		bow.setBulletSpeed(200);
+		add(bow.group);
+		bow.setBulletBounds(world);
+		bow.setFireRate(10);
 		
 		//testSkelly = new Skeleton(Reg.player.x, Reg.player.y);
 		Reg.enemyGroup.maxSize = 30;
@@ -127,7 +129,7 @@ class PlayState extends FlxState
 		//adding some good ol' faith
 		faithBar = new FlxGroup();
 		
-		var faithBG = new FlxSprite(115, 30);
+		var faithBG = new FlxSprite(70, 30);
 		faithBG.scrollFactor.x = 0;
 		faithBG.scrollFactor.y = 0;
 		faithBG.loadGraphic("assets/images/faithbg.png", false);
@@ -136,16 +138,30 @@ class PlayState extends FlxState
 		
 		//trace(faithBG.x + faithBG.y);
 		
-		faithMeter = new FlxSprite(115, 30);
+		faithMeter = new FlxSprite(155, 30);
 		faithMeter.scrollFactor.x = 0;
 		faithMeter.scrollFactor.y = 0;
 		faithMeter.makeGraphic(1, 10, FlxColor.WHITE);
 		//faithMeter.origin.x = faithMeter.origin.y = 0;
 		faithMeter.scale.x = 180;
-
-		faithBar.add(faithMeter);
 		
+		healthMeter = new FlxSprite(160, 40);
+		healthMeter.scrollFactor.x = 0;
+		healthMeter.scrollFactor.y = 0;
+		healthMeter.makeGraphic(1, 10, FlxColor.RED);
+		//faithMeter.origin.x = faithMeter.origin.y = 0;
+		healthMeter.scale.x = 180;
+
+		scoreText = new FlxText(130, 10, 50, Std.string(Reg.score), 16);
+		scoreText.alignment = "center";
+		scoreText.scrollFactor.x = 0;
+		scoreText.scrollFactor.y = 0;
+		
+		faithBar.add(scoreText);
+		faithBar.add(faithMeter);
+		faithBar.add(healthMeter);
 		add(faithBar);
+
 		
 		
 		
@@ -166,9 +182,14 @@ class PlayState extends FlxState
 	{
 		if (Reg.player.faith > 0)
 		{
-			Reg.player.faith -= 0.03;
+			Reg.player.faith -= 0.02;
+			Reg.player.health += 0.02 / 18;
 		}
+
+		scoreText.text = Std.string(Reg.score);
+		
 		faithMeter.scale.x = Reg.player.faith;
+		healthMeter.scale.x = Reg.player.health * 18;
 		
 		//testmap.collideWithLevel(Reg.player);
 		//testmap.collideWithLevel(Reg.enemyGroup);
@@ -195,26 +216,27 @@ class PlayState extends FlxState
 			//FlxG.camera.zoom = Reg.zoomLevel;
 			Reg.player.faith -= 0.2;
 			
+			FlxG.sound.play("assets/sound/fire.wav", 0.2, false);
 			
 			switch(Reg.player.facing)
 			{
 
 				case FlxObject.LEFT:
-					lazer.fireFromAngle(180);
+					bow.fireFromAngle(180);
 					//lazer.setBulletDirection(FlxWeapon.BULLET_LEFT, 400);
 
 				
 				case FlxObject.RIGHT:	
-					lazer.fireFromAngle(0);
+					bow.fireFromAngle(0);
 					//lazer.setBulletDirection(FlxWeapon.BULLET_RIGHT, 400);
 
 					
 				case FlxObject.UP:
-					lazer.fireFromAngle( -90);
+					bow.fireFromAngle( -90);
 					//lazer.setBulletDirection(FlxWeapon.BULLET_UP, 400);
 					
 				case FlxObject.DOWN:
-					lazer.fireFromAngle(90);
+					bow.fireFromAngle(90);
 					//lazer.setBulletDirection(FlxWeapon.BULLET_DOWN, 400);
 			}
 			
@@ -235,15 +257,16 @@ class PlayState extends FlxState
 	private function collideStuff()
 	{
 		FlxG.collide(Reg.enemyGroup, Reg.enemyGroup, FlxObject.separate);
+		FlxG.overlap(Reg.enemyGroup, bow.group, collideBullet);
+		FlxG.overlap(Reg.player, Reg.exit, fadeOut);
 		
-		FlxG.overlap(Reg.enemyGroup, lazer.group, collideBullet);
-		
-		if (testmap.collidableTileLayers != null)
+		if (Reg.testmap.collidableTileLayers != null)
 		{
-			for (map in testmap.collidableTileLayers)
+			for (map in Reg.testmap.collidableTileLayers)
 			{
 				FlxG.overlap(map, Reg.player, FlxObject.separate);
 				FlxG.overlap(map, Reg.enemyGroup, FlxObject.separate);
+				FlxG.collide(map, bow.group, bulletWall);
 			}
 		}
 	}	
@@ -255,8 +278,28 @@ class PlayState extends FlxState
 		if (enemy.health <= 0)
 		{
 			enemy.kill();
+			Reg.score += 5;
 		}
 	}
 	
+	private function bulletWall(map:Dynamic, bullet:FlxBullet)
+	{
+		bullet.kill();
+	}
+	
+	private function fadeOut(p:Character, e:FlxSprite)
+	{
+		FlxG.camera.fade(FlxColor.BLACK, 3, false, goToMenu);
+	}
+	
+	private function fadeIn()
+	{
+		FlxG.camera.fade(FlxColor.BLACK, 3, true);
+	}
+	
+	private function goToMenu()
+	{
+		FlxG.switchState(new MenuState());
+	}
 	
 }

@@ -14,6 +14,7 @@ class Pillar extends FlxExtendedSprite
 {
 
 	private var isActivated:Bool = false;
+	private var deactivateCounter:Float = 0;
 	
 	public function new(x:Float, y:Float) 
 	{
@@ -22,8 +23,24 @@ class Pillar extends FlxExtendedSprite
 		this.loadGraphic("assets/images/pillar.png", true, 16, 48);
 		this.animation.add("static", [0], 0, true);
 		this.animation.add("activate", [0, 1, 2, 3, 4, 5, 6], 15, false);
+		this.animation.add("deactivate", [6, 5, 4, 3, 2, 1, 0], 15, false);
 		animation.play("static");
 	}
+	
+	override public function update()
+	{
+		super.update();
+		
+		if (isActivated == true)
+		{
+			deactivateCounter += FlxG.elapsed;
+		}
+		if (deactivateCounter > 10)
+		{
+			deactivate();
+		}
+	}
+	
 	
 	public function checkActivation(object:FlxObject, state:PlayState)
 	{
@@ -35,7 +52,7 @@ class Pillar extends FlxExtendedSprite
 			var distance = FlxMath.getDistance(p1, p2);
 			if (distance < 50 && isActivated == false)
 			{
-				Reg.player.faith += 10;
+				Reg.player.faith += 15;
 				activate();
 			}
 		}
@@ -48,4 +65,14 @@ class Pillar extends FlxExtendedSprite
 		animation.play("activate");
 		
 	}
+	
+	private function deactivate()
+	{
+		isActivated = false;
+		animation.play("deactivate");
+		deactivateCounter = 0;
+	}
+	
+	
+	
 }

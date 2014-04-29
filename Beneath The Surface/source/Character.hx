@@ -8,6 +8,7 @@ import haxe.io.Path;
 import haxe.Json;
 import openfl.Assets;
 import flixel.addons.display.FlxExtendedSprite;
+import flixel.util.FlxPoint;
 
 /**
  * ...
@@ -27,6 +28,10 @@ class Character extends FlxExtendedSprite
 	public var rolling:Bool = false;
 	public var rollTimer:Float = 0;
 	public var faith:Float = 0;
+	
+	public var pastPlayerPosition:FlxPoint;
+	public var currentPlayerPosition:FlxPoint;
+	
 	//public var message:Message;
 	
 	public function new(X:Float, Y:Float, ?JsonPath:String, ?SimpleGraphic:Dynamic) 
@@ -45,6 +50,9 @@ class Character extends FlxExtendedSprite
 		
 		this.drag.x = this.maxVelocity.x * 4;
 		this.drag.y = this.maxVelocity.y * 4;
+		
+		pastPlayerPosition = new FlxPoint(0, 0);
+		currentPlayerPosition = new FlxPoint(0, 0);
 	}
 	
 	public override function update()
@@ -65,6 +73,10 @@ class Character extends FlxExtendedSprite
 		{
 			this.acceleration.x = 0;
 			this.acceleration.y = 0;
+			
+			pastPlayerPosition.x = currentPlayerPosition.x;
+			pastPlayerPosition.y = pastPlayerPosition.y;
+			
 			
 			if (FlxG.keys.anyPressed(["RIGHT"]))
 			{
@@ -103,7 +115,11 @@ class Character extends FlxExtendedSprite
 				{
 					rolling = true;
 				}
-			}	
+			}
+			
+			currentPlayerPosition.x = this.x;
+			currentPlayerPosition.y = this.y;
+			
 		}
 		checkBoundsMap();
 		doAnimation();
@@ -150,7 +166,7 @@ class Character extends FlxExtendedSprite
 		}
 	}
 
-	//TODO rewrite doAnimation so it's agnostic for topdown, 2.5D, and side-scrolling
+	
 	private function doAnimation()
 	{
 		//TODO add images for the roll		
@@ -252,9 +268,6 @@ class Character extends FlxExtendedSprite
 		//trace("collision OK!");
 
 		//add dialog text
-		//TODO fix the fact that this is a cheeky hack because I don't understand Haxe.Reflect
-		
-		//TODO Maybe use this at some point
 		/*
 		message = new Message([]);
 		var ctr:Int = 0;

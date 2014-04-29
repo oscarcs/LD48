@@ -16,19 +16,25 @@ class MenuState extends FlxState
 	private var parts:FlxEmitter;
 	private var playButton:FlxButton;
 	private var playText:FlxText;
+	private var twitterButton:FlxButton;
+	private var splashBackground:FlxSprite;
 	
 	override public function create():Void
 	{
 		var alignX:Int = Std.int(FlxG.width / 2);
 		
-		trace("Beneath the Surface Build 1");
+		//trace("Beneath the Surface Build 1");
 		//TODO add opening sound
 		
+		splashBackground = new FlxSprite(0, 0, "assets/images/splash.png");
+		add(splashBackground);
+		
+		
 		//add the title
-		titleText = new FlxText(alignX, 50, 0, "Beneath The Surface", 30);
+		titleText = new FlxText(alignX, 50, 0, "SUPER ROBO GARDEN ARENA", 30);
 		titleText.x = alignX - (titleText.width / 2);
 		titleText.alignment = "center";
-		titleText.color = 0x729954;
+		titleText.color = 0xFF3D3A33;
 		add(titleText);
 		
 		//add some particles
@@ -42,21 +48,39 @@ class MenuState extends FlxState
 		add(parts);
 		
 		//add the 'play'
-		playText = new FlxText(1, titleText.x + 30, 0, "C: Shoot, Z:Pray, X:Roll(Unimplemented)", 15);
+		playText = new FlxText(1, titleText.x + 360, 0, "C: Shoot, Z:Pray\nMade for Ludum Dare 29 by nxT", 15);
 		playText.x = alignX - (playText.width / 2);
-		playText.color = FlxColor.WHITE;
+		playText.color = 0xFF3D3A33;
 		playText.alignment = "centre";
 		add(playText);
 		
 		//add the button
-		playButton = new FlxButton(1, titleText.x + 3, "Begin", onPlay);
+		playButton = new FlxButton(1, titleText.x + 100, "", onPlay);
+		playButton.loadGraphic("assets/images/play.png", true, 100, 50);
 		playButton.width = 100;
 		playButton.height = 50;
+		playButton.scale.x = 2;
+		playButton.scale.y = 2;
 		playButton.x = alignX - (playButton.width / 2);
-		playButton.color = 0x729954;
-		playButton.label.color = 0x009954;
+		//playButton.color = 0x729954;
+		//playButton.label.color = 0x009954;
 		//playButton.visible = false;
 		add(playButton);
+		
+		twitterButton = new FlxButton(FlxG.width - 100, FlxG.height - 75, "", onTwitter);
+		twitterButton.loadGraphic("assets/images/twitter.png", true, 100, 50);
+		//Button.width = 100;
+		//playButton.height = 50;
+		twitterButton.scale.x = 2;
+		twitterButton.scale.y = 2;
+		
+		//twitterButton.x = alignX - (playButton.width / 2);
+		//playButton.color = 0x729954;
+		//playButton.label.color = 0x009954;
+		//playButton.visible = false;
+		add(twitterButton);
+		
+		
 		
 		super.create();
 	}
@@ -83,11 +107,22 @@ class MenuState extends FlxState
 		//play sounds
 	}
 	
+	private function onTwitter():Void
+	{
+		//fadeOut();
+		FlxG.openURL("http://twitter.com/ocsims");
+		//play sounds
+	}
+	
+	
 	private function fadeOut():Void
 	{
-		FlxG.camera.fade(FlxColor.BLACK, 1, false);
+		FlxG.camera.fade(FlxColor.BLACK, 3, false, changeState);
 		//trace("fading out");
+	}
+	
+	private function changeState()
+	{
 		FlxG.switchState(new PlayState());
-		
 	}
 }

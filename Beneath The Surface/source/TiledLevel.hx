@@ -27,6 +27,7 @@ class TiledLevel extends TiledMap
 	// Array of tilemaps used for collision
 	public var foregroundTiles:FlxGroup;
 	public var backgroundTiles:FlxGroup;
+	public var enemyCollision:FlxTilemap;
 	public var collidableTileLayers:Array<FlxTilemap>;
 
 	public function new(tiledLevel:Dynamic)
@@ -81,6 +82,8 @@ class TiledLevel extends TiledMap
 				if (collidableTileLayers == null)
 					collidableTileLayers = new Array<FlxTilemap>();
 
+				enemyCollision = tilemap;
+					
 				foregroundTiles.add(tilemap);
 				collidableTileLayers.push(tilemap);
 			}
@@ -161,10 +164,9 @@ class TiledLevel extends TiledMap
 			case "exit":
 				// Create the level exit
 				var exit = new FlxSprite(x, y);
-				exit.makeGraphic(32, 32, 0xff3f3f3f);
-				exit.exists = false;
-				state.exit = exit;
-				state.add(exit);			
+				Reg.exit = exit;
+				Reg.exit.loadGraphic("assets/images/exit.png", false, 16, 16);
+				state.add(Reg.exit);			
 		}
 	}
 

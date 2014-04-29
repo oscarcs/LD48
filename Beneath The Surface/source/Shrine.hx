@@ -15,6 +15,7 @@ class Shrine extends FlxExtendedSprite
 {
 	
 	private var isActivated:Bool = false;
+	private var deactivateCounter:Float = 0;
 	
 
 	public function new(x:Float, y:Float) 
@@ -24,12 +25,21 @@ class Shrine extends FlxExtendedSprite
 		this.loadGraphic("assets/images/shrine.png", true, 16, 32);
 		this.animation.add("static", [0], 0, true);
 		this.animation.add("activate", [0, 1, 2, 3, 4, 5, 6], 15, false);
+		this.animation.add("deactivate", [6, 5, 4, 3, 2, 1, 0], 15, false);
 		animation.play("static");
 	}
 	
 	override public function update()
 	{
 		super.update();
+		if (isActivated == true)
+		{
+			deactivateCounter += FlxG.elapsed;
+		}
+		if (deactivateCounter > 10)
+		{
+			deactivate();
+		}	
 	}
 	
 	public function checkActivation(object:FlxObject, state:PlayState)
@@ -45,11 +55,7 @@ class Shrine extends FlxExtendedSprite
 				Reg.player.faith += 10;
 				activate();
 			}	
-		}
-
-		
-		
-		
+		}	
 		
 	}
 	
@@ -59,4 +65,13 @@ class Shrine extends FlxExtendedSprite
 		animation.play("activate");
 		
 	}
+	
+	private function deactivate()
+	{
+		isActivated = false;
+		animation.play("deactivate");
+		deactivateCounter = 0;
+	}
+	
+	
 }

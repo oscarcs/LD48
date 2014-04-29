@@ -53,7 +53,7 @@ class Mound extends FlxExtendedSprite
 		//Reg.enemyGroup.add(spawn);
 
 			Reg.enemyGroup.recycle(Skeleton, [this.x, this.y]);
-			FlxG.camera.shake(0.005, 0.05);
+			//FlxG.camera.shake(0.005, 0.05);
 			this.animation.play("poststatic");
 	}
 }

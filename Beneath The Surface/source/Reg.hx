@@ -1,5 +1,6 @@
 package ;
 
+import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.util.FlxSave;
 
@@ -12,6 +13,8 @@ class Reg
 	public static var player:Character;
 	public static var zoomLevel:Float = 2;
 	public static var enemyGroup:FlxGroup;
+	public static var testmap:TiledLevel;
+	public static var exit:FlxSprite;
 	
 	public static var levels:Array<Dynamic> = [];
 	public static var level:Int = 0;
