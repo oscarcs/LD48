@@ -15,6 +15,7 @@ class Reg
 	public static var enemyGroup:FlxGroup;
 	public static var testmap:TiledLevel;
 	public static var exit:FlxSprite;
+	public static var hurtCounter:Float = 0;
 	
 	public static var levels:Array<Dynamic> = [];
 	public static var level:Int = 0;

@@ -97,6 +97,12 @@ class MenuState extends FlxState
 	override public function update():Void
 	{
 		super.update();
+		
+		if (FlxG.keys.anyPressed(["ENTER"]))
+		{
+			fadeOut();
+		}
+		
 		//parts.start(true, 5);
 		//TODO Put in attract mode or something if I've got time
 	}

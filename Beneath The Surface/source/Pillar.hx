@@ -59,6 +59,7 @@ class Pillar extends FlxExtendedSprite
 
 	}
 	
+	//light up the pillar
 	private function activate()
 	{
 		isActivated = true;
@@ -66,6 +67,7 @@ class Pillar extends FlxExtendedSprite
 		
 	}
 	
+	//return the pillar to it's normal state.
 	private function deactivate()
 	{
 		isActivated = false;

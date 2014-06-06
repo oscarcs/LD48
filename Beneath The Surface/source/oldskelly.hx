@@ -154,4 +154,4 @@ class Skeleton extends Character
 			}
 		}
 	}
-}
+//}

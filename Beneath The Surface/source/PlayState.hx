@@ -188,6 +188,8 @@ class PlayState extends FlxState
 
 		scoreText.text = Std.string(Reg.score);
 		
+		Reg.hurtCounter += FlxG.elapsed;
+		
 		faithMeter.scale.x = Reg.player.faith;
 		healthMeter.scale.x = Reg.player.health * 18;
 		
@@ -201,7 +203,6 @@ class PlayState extends FlxState
 		shrines.callAll("checkActivation", [Reg.player, this], true);
 		pillars.callAll("checkActivation", [Reg.player, this], true);
 
-		
 		mounds.callAll("revealMound", [Reg.player, this], true);
 		//FlxG.collide(player, shrines);
 		
@@ -210,47 +211,30 @@ class PlayState extends FlxState
 			trace(Reg.player.health);
 		}
 		
-		
 		if (FlxG.keys.anyPressed(["C"]) && Reg.player.faith > 1 )
 		{
 			//FlxG.camera.zoom = Reg.zoomLevel;
 			Reg.player.faith -= 0.2;
-			
 			FlxG.sound.play("assets/sound/fire.wav", 0.2, false);
 			
 			switch(Reg.player.facing)
 			{
-
 				case FlxObject.LEFT:
 					bow.fireFromAngle(180);
-					//lazer.setBulletDirection(FlxWeapon.BULLET_LEFT, 400);
-
 				
 				case FlxObject.RIGHT:	
 					bow.fireFromAngle(0);
-					//lazer.setBulletDirection(FlxWeapon.BULLET_RIGHT, 400);
 
-					
 				case FlxObject.UP:
 					bow.fireFromAngle( -90);
-					//lazer.setBulletDirection(FlxWeapon.BULLET_UP, 400);
 					
 				case FlxObject.DOWN:
 					bow.fireFromAngle(90);
-					//lazer.setBulletDirection(FlxWeapon.BULLET_DOWN, 400);
 			}
-			
-			
-			//lazer.fireFromParentAngle();
 			FlxG.camera.shake(0.005, 0.05);
-			//trace("firing");
 		}
-		
-		
-		
 		//trace("gun: X: " + lol.x + " Y: " + lol.y);
 		//trace("player: X: " + Reg.player.x + " Y: " + Reg.player.y);
-		
 		super.update();	
 	}
 	
@@ -259,6 +243,11 @@ class PlayState extends FlxState
 		FlxG.collide(Reg.enemyGroup, Reg.enemyGroup, FlxObject.separate);
 		FlxG.overlap(Reg.enemyGroup, bow.group, collideBullet);
 		FlxG.overlap(Reg.player, Reg.exit, fadeOut);
+		if (Reg.hurtCounter > 0.75)
+		{
+			FlxG.collide(Reg.player, Reg.enemyGroup, hurtPlayer);
+		}
+		FlxG.collide(Reg.player, Reg.enemyGroup, FlxObject.separate);
 		
 		if (Reg.testmap.collidableTileLayers != null)
 		{
@@ -285,6 +274,14 @@ class PlayState extends FlxState
 	private function bulletWall(map:Dynamic, bullet:FlxBullet)
 	{
 		bullet.kill();
+	}
+	
+	public function hurtPlayer(player:Character, enemy:Skeleton):Void
+	{
+		Reg.player.health -= 1;
+		Reg.hurtCounter = 0;
+		FlxG.sound.play("assets/sound/hurt.wav", 0.5, false);
+		Reg.score -= 1;
 	}
 	
 	private function fadeOut(p:Character, e:FlxSprite)

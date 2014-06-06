@@ -39,18 +39,14 @@ class Character extends FlxExtendedSprite
 		super(x, y, SimpleGraphic);
 		parseJson(JsonPath);
 		//trace("created character");
-		this.facing = FlxObject.DOWN;
 		
-		this.health = 10;
-		
-		this.x = X;
-		this.y = Y;
-		
-		this.solid = true;
-		
-		this.drag.x = this.maxVelocity.x * 4;
-		this.drag.y = this.maxVelocity.y * 4;
-		
+		facing = FlxObject.DOWN;
+		health = 10;
+		x = X;
+		y = Y;
+		solid = true;
+		drag.x = this.maxVelocity.x * 18;
+		drag.y = this.maxVelocity.y * 18;
 		pastPlayerPosition = new FlxPoint(0, 0);
 		currentPlayerPosition = new FlxPoint(0, 0);
 	}

@@ -20,8 +20,8 @@ class Skeleton extends Character
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y, "assets/data/skeleton.json");
-		this.controllable = false;
-		this.health = 15;
+		controllable = false;
+		health = 15;
 		currentFollowPosition = new FlxPoint(x, y);	
 		
 		//createPath();
@@ -36,19 +36,14 @@ class Skeleton extends Character
 		//moveToPlayer();
 		//moveFollower();
 		
-		if (FlxG.collide(Reg.player, this))
-		{
-			FlxObject.separate(this, Reg.player);
-			hurtPlayer();
-		}
-		
+
 		
 		checkBoundsMap();
 		doAnimation();
 		
-		if (this.health <= 0)
+		if (health <= 0)
 		{
-			this.kill();
+			kill();
 		}
 		
 		hurtCounter += FlxG.elapsed;
@@ -58,7 +53,7 @@ class Skeleton extends Character
 	
 	public function hurtPlayer():Void
 	{
-		if (hurtCounter > 0.75)
+		if (Reg.hurtCounter > 0.75)
 		{
 			Reg.player.health -= 1;
 			hurtCounter = 0;

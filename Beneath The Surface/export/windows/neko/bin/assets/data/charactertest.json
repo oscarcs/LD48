@@ -1,0 +1,55 @@
+{
+	"sprite": {
+		"texture": "test.png",
+		"framewidth": 16,
+		"frameheight": 16
+	},
+	"velocity": {
+		"xmax": 160,
+		"ymax": 160
+	},
+	"collision": {
+		"x": 0,
+		"y": 0,
+		"width": 16,
+		"height": 16
+	},
+	"dialog": {
+		"test of the dialog system": "",
+		"test no 2": ""
+	},
+	"animation": {
+		"framerate" : {
+			"def": 0,
+			"idle": 2,
+			"walking": 15,
+			"rolling": 5
+		},
+		"frames" : {
+			"up": {
+				"def": [12],
+				"idle": [12,13],
+				"walking":[12,13,14,15],
+				"rolling":[12,13,14,15]
+			},
+			"left": {
+				"def": [4],
+				"idle": [4,5],
+				"walking":[4,5,6,7],
+				"rolling":[4,5,6,7]
+			},
+			"right": {
+				"def": [0],
+				"idle": [0,1],
+				"walking":[0,1,2,3],
+				"rolling":[0,1,2,3]
+			},
+			"down": {
+				"def": [8],
+				"idle": [8,9],
+				"walking":[8,9,10,11],
+				"rolling":[8,9,10,11]
+			}
+		}
+	}
+}
