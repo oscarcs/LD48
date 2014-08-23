@@ -59,10 +59,10 @@ class PlayState extends FlxState
 		super.create();
 		//trace("creating");
 		//Reg.player
-	
+		
 		fadeIn();
 		
-		Reg.testmap = new TiledLevel("assets/data/newlevel.tmx");
+		Reg.testmap = ne	w TiledLevel("assets/data/newlevel.tmx");
 		add(Reg.testmap.backgroundTiles);
 		add(Reg.testmap.foregroundTiles);
 		
@@ -180,6 +180,7 @@ class PlayState extends FlxState
 
 	override public function update():Void
 	{
+		FlxG.timeScale = 1;
 		if (Reg.player.faith > 0)
 		{
 			Reg.player.faith -= 0.02;
@@ -213,6 +214,7 @@ class PlayState extends FlxState
 		
 		if (FlxG.keys.anyPressed(["C"]) && Reg.player.faith > 1 )
 		{
+			//FlxG.timeScale = 0.3;
 			//FlxG.camera.zoom = Reg.zoomLevel;
 			Reg.player.faith -= 0.2;
 			FlxG.sound.play("assets/sound/fire.wav", 0.2, false);

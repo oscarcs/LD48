@@ -952,8 +952,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:bitmap("assets/images/weapon.png") class __ASSET__assets_images_weapon_png extends flash.display.BitmapData {}
 @:sound("assets/sound/fire.wav") class __ASSET__assets_sound_fire_wav extends flash.media.Sound {}
 @:sound("assets/sound/hurt.wav") class __ASSET__assets_sound_hurt_wav extends flash.media.Sound {}
-@:sound("E:/Haxe/haxe/lib/flixel/3,3,1/assets/sounds/beep.mp3") class __ASSET__assets_sounds_beep_mp3 extends flash.media.Sound {}
-@:sound("E:/Haxe/haxe/lib/flixel/3,3,1/assets/sounds/flixel.mp3") class __ASSET__assets_sounds_flixel_mp3 extends flash.media.Sound {}
+@:sound("E:/Haxe/haxe/lib/flixel/3,3,3/assets/sounds/beep.mp3") class __ASSET__assets_sounds_beep_mp3 extends flash.media.Sound {}
+@:sound("E:/Haxe/haxe/lib/flixel/3,3,3/assets/sounds/flixel.mp3") class __ASSET__assets_sounds_flixel_mp3 extends flash.media.Sound {}
 
 
 #end
