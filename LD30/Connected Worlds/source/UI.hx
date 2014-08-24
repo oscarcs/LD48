@@ -73,11 +73,12 @@ class UI extends FlxBasic
 		lineSurface = new FlxSprite(0, 0);
 		lineSurface.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT);
 		lineSurface.scrollFactor.set(0, 0);
-		parent.add(lineSurface);
 		
+		parent.add(lineSurface);
 		parent.add(this);
 		parent.add(minimap);
 		parent.add(minimap.current);
+		parent.add(minimap.circlebg);
 	}
 	
 	override public function update()
