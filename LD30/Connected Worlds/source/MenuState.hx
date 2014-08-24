@@ -14,9 +14,6 @@ class MenuState extends FlxState
 	{
 		super.create();
 		
-		//import a font
-	
-		
 		FlxG.switchState(new PlayState());
 	}
 

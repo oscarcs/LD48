@@ -1,0 +1,6 @@
+Star name text from https://en.wikipedia.org/wiki/List_of_proper_names_of_stars/ 
+Available under the Creative Commons Attribution-ShareAlike License - http://creativecommons.org/licenses/by-sa/3.0/
+
+nxColor by me, available under the MIT license: https://github.com/xxnxT/nxColor
+
+Made in 48 hours for Ludum Dare 30, August 2014.

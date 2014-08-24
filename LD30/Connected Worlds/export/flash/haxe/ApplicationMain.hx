@@ -24,7 +24,7 @@ class ApplicationMain {
 		
 		
 		
-		//nme.Lib.setPackage("NxT", "ConnectedWorlds", "com.example.myapp", "0.0.1");
+		//nme.Lib.setPackage("NxT", "ConnectedWorlds", "org.nxtos.cw", "0.0.1");
 		
 		loaderInfo = openfl.Lib.current.loaderInfo;
 		

@@ -54,12 +54,18 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/perfect_dos_vga_437/Perfect DOS VGA 437.ttf", AssetType.FONT);
 		className.set ("assets/data/perfect_dos_vga_437.zip", __ASSET__assets_data_perfect_dos_vga_437_zip);
 		type.set ("assets/data/perfect_dos_vga_437.zip", AssetType.BINARY);
-		className.set ("assets/images/images-go-here.txt", __ASSET__assets_images_images_go_here_txt);
-		type.set ("assets/images/images-go-here.txt", AssetType.TEXT);
-		className.set ("assets/music/music-goes-here.txt", __ASSET__assets_music_music_goes_here_txt);
-		type.set ("assets/music/music-goes-here.txt", AssetType.TEXT);
-		className.set ("assets/sounds/sounds-go-here.txt", __ASSET__assets_sounds_sounds_go_here_txt);
-		type.set ("assets/sounds/sounds-go-here.txt", AssetType.TEXT);
+		className.set ("assets/data/stars.txt", __ASSET__assets_data_stars_txt);
+		type.set ("assets/data/stars.txt", AssetType.TEXT);
+		className.set ("assets/images/arrows.png", __ASSET__assets_images_arrows_png);
+		type.set ("assets/images/arrows.png", AssetType.IMAGE);
+		className.set ("assets/images/down.png", __ASSET__assets_images_down_png);
+		type.set ("assets/images/down.png", AssetType.IMAGE);
+		className.set ("assets/images/left.png", __ASSET__assets_images_left_png);
+		type.set ("assets/images/left.png", AssetType.IMAGE);
+		className.set ("assets/images/right.png", __ASSET__assets_images_right_png);
+		type.set ("assets/images/right.png", AssetType.IMAGE);
+		className.set ("assets/images/up.png", __ASSET__assets_images_up_png);
+		type.set ("assets/images/up.png", AssetType.IMAGE);
 		className.set ("assets/sounds/beep.mp3", __ASSET__assets_sounds_beep_mp3);
 		type.set ("assets/sounds/beep.mp3", AssetType.MUSIC);
 		className.set ("assets/sounds/flixel.mp3", __ASSET__assets_sounds_flixel_mp3);
@@ -81,15 +87,24 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/data/perfect_dos_vga_437.zip";
 		path.set (id, id);
 		type.set (id, AssetType.BINARY);
-		id = "assets/images/images-go-here.txt";
+		id = "assets/data/stars.txt";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
-		id = "assets/music/music-goes-here.txt";
+		id = "assets/images/arrows.png";
 		path.set (id, id);
-		type.set (id, AssetType.TEXT);
-		id = "assets/sounds/sounds-go-here.txt";
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/down.png";
 		path.set (id, id);
-		type.set (id, AssetType.TEXT);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/left.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/right.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/up.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/sounds/beep.mp3";
 		path.set (id, id);
 		type.set (id, AssetType.MUSIC);
@@ -116,14 +131,23 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("assets/data/perfect_dos_vga_437.zip", __ASSET__assets_data_perfect_dos_vga_437_zip);
 		type.set ("assets/data/perfect_dos_vga_437.zip", AssetType.BINARY);
 		
-		className.set ("assets/images/images-go-here.txt", __ASSET__assets_images_images_go_here_txt);
-		type.set ("assets/images/images-go-here.txt", AssetType.TEXT);
+		className.set ("assets/data/stars.txt", __ASSET__assets_data_stars_txt);
+		type.set ("assets/data/stars.txt", AssetType.TEXT);
 		
-		className.set ("assets/music/music-goes-here.txt", __ASSET__assets_music_music_goes_here_txt);
-		type.set ("assets/music/music-goes-here.txt", AssetType.TEXT);
+		className.set ("assets/images/arrows.png", __ASSET__assets_images_arrows_png);
+		type.set ("assets/images/arrows.png", AssetType.IMAGE);
 		
-		className.set ("assets/sounds/sounds-go-here.txt", __ASSET__assets_sounds_sounds_go_here_txt);
-		type.set ("assets/sounds/sounds-go-here.txt", AssetType.TEXT);
+		className.set ("assets/images/down.png", __ASSET__assets_images_down_png);
+		type.set ("assets/images/down.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/left.png", __ASSET__assets_images_left_png);
+		type.set ("assets/images/left.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/right.png", __ASSET__assets_images_right_png);
+		type.set ("assets/images/right.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/up.png", __ASSET__assets_images_up_png);
+		type.set ("assets/images/up.png", AssetType.IMAGE);
 		
 		className.set ("assets/sounds/beep.mp3", __ASSET__assets_sounds_beep_mp3);
 		type.set ("assets/sounds/beep.mp3", AssetType.MUSIC);
@@ -751,9 +775,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__assets_data_perfect_dos_vga_437_dos437_txt extends openfl.utils.ByteArray { }
 @:keep class __ASSET__assets_data_perfect_dos_vga_437_perfect_dos_vga_437_ttf extends openfl.text.Font { }
 @:keep class __ASSET__assets_data_perfect_dos_vga_437_zip extends openfl.utils.ByteArray { }
-@:keep class __ASSET__assets_images_images_go_here_txt extends openfl.utils.ByteArray { }
-@:keep class __ASSET__assets_music_music_goes_here_txt extends openfl.utils.ByteArray { }
-@:keep class __ASSET__assets_sounds_sounds_go_here_txt extends openfl.utils.ByteArray { }
+@:keep class __ASSET__assets_data_stars_txt extends openfl.utils.ByteArray { }
+@:keep class __ASSET__assets_images_arrows_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_down_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_left_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_right_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_up_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_sounds_beep_mp3 extends openfl.media.Sound { }
 @:keep class __ASSET__assets_sounds_flixel_mp3 extends openfl.media.Sound { }
 
@@ -771,6 +798,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
 #elseif (windows || mac || linux)
 
 
@@ -778,9 +808,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:file("assets/data/perfect_dos_vga_437/dos437.txt") class __ASSET__assets_data_perfect_dos_vga_437_dos437_txt extends flash.utils.ByteArray {}
 @:font("assets/data/perfect_dos_vga_437/Perfect DOS VGA 437.ttf") class __ASSET__assets_data_perfect_dos_vga_437_perfect_dos_vga_437_ttf extends flash.text.Font {}
 @:file("assets/data/perfect_dos_vga_437.zip") class __ASSET__assets_data_perfect_dos_vga_437_zip extends flash.utils.ByteArray {}
-@:file("assets/images/images-go-here.txt") class __ASSET__assets_images_images_go_here_txt extends flash.utils.ByteArray {}
-@:file("assets/music/music-goes-here.txt") class __ASSET__assets_music_music_goes_here_txt extends flash.utils.ByteArray {}
-@:file("assets/sounds/sounds-go-here.txt") class __ASSET__assets_sounds_sounds_go_here_txt extends flash.utils.ByteArray {}
+@:file("assets/data/stars.txt") class __ASSET__assets_data_stars_txt extends flash.utils.ByteArray {}
+@:bitmap("assets/images/arrows.png") class __ASSET__assets_images_arrows_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/down.png") class __ASSET__assets_images_down_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/left.png") class __ASSET__assets_images_left_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/right.png") class __ASSET__assets_images_right_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/up.png") class __ASSET__assets_images_up_png extends flash.display.BitmapData {}
 @:sound("E:/Haxe/haxe/lib/flixel/3,3,5/assets/sounds/beep.mp3") class __ASSET__assets_sounds_beep_mp3 extends flash.media.Sound {}
 @:sound("E:/Haxe/haxe/lib/flixel/3,3,5/assets/sounds/flixel.mp3") class __ASSET__assets_sounds_flixel_mp3 extends flash.media.Sound {}
 

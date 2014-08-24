@@ -16,7 +16,7 @@ class ApplicationMain {
 	
 	public static function main () {
 		
-		flash.Lib.setPackage ("NxT", "ConnectedWorlds", "com.example.myapp", "0.0.1");
+		flash.Lib.setPackage ("NxT", "ConnectedWorlds", "org.nxtos.cw", "0.0.1");
 		
 		
 		#if ios
@@ -297,7 +297,7 @@ class ApplicationMain {
 	public static function main () {
 		
 		#if openfl
-		flash.Lib.setPackage ("NxT", "ConnectedWorlds", "com.example.myapp", "0.0.1");
+		flash.Lib.setPackage ("NxT", "ConnectedWorlds", "org.nxtos.cw", "0.0.1");
 		
 		#end
 		

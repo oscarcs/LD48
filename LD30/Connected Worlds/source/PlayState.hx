@@ -19,6 +19,7 @@ class PlayState extends FlxState
 	
 	
 	public var starArray:Array<Star> = [];
+	public var clusters:Array<Cluster> = [];
 	
 	public var drawingLine:Bool = false;
 	public var connectionsUpdated:Bool = false;
@@ -27,9 +28,24 @@ class PlayState extends FlxState
 	public var drawingFrom:Star = null;
 	public var highlighted:Star;
 	
+	public var timeStepCounter:Float = 0;
+	public var stepNumber:Int = 0;
+	
+	private var ui:UI;
+	
+	public var money:Float;
+	
 	override public function create():Void
 	{
 		super.create();
+		
+		#if mobile
+		FlxG.camera.zoom = 2;
+		#end
+		
+		FlxG.worldBounds.set( 0, 0, 10000, 10000);
+		FlxG.camera.setBounds( 0, 0, 10000, 10000);
+		
 		FlxG.camera.bgColor = FlxColor.BLACK;
 		
 		skySurface = new FlxSprite(0, 0);
@@ -81,14 +97,25 @@ class PlayState extends FlxState
 		
 		for (i in 0...60)
 		{
-			var stTest:Star = new Star(Std.random(FlxG.width), Std.random(FlxG.height), Std.random(4) + 2, i, this);
+			//var stTest:Star = new Star(Std.random(FlxG.width), Std.random(FlxG.height), Std.random(4) + 2, i, this);
 			//FlxSpriteUtil.drawCircle(stTest, stTest.mid.x, stTest.mid.y, stTest.size, FlxColor.WHITE);
-			add(stTest);
-			starArray.push(stTest);
+			//add(stTest);
+			//starArray.push(stTest);
+		}
+		
+		//var clusterTest = new Cluster(30, 30, 1000, 1000, this, 1);
+		
+		for (i in 0...30)
+		{
+			var clusterTest = new Cluster(Std.random(Math.ceil(FlxG.worldBounds.width)) - 500, Std.random(Math.ceil(FlxG.worldBounds.height)) - 500, Std.random(1000), Std.random(1000), this, i);
+			clusters.push(clusterTest);
 		}
 		
 		//var connTest = new Connection(starArray[20], starArray[22]);
 		//add(connTest);
+		
+		//add the ui last
+		ui = new UI(this);
 
 	}
 
@@ -101,11 +128,20 @@ class PlayState extends FlxState
 	{
 		super.update();
 		
+		
+		timeStepCounter += FlxG.elapsed;
+		if (timeStepCounter >= 1)
+		{
+			timeStepCounter = 0;
+			++stepNumber;
+		}
+		
 		FlxSpriteUtil.fill(lineSurface, FlxColor.TRANSPARENT);
 		
 		if (drawingLine)
 		{
-			FlxSpriteUtil.drawLine(lineSurface, drawingFrom.x, drawingFrom.y, FlxG.mouse.x, FlxG.mouse.y, connection);
+			//FlxSpriteUtil.drawLine(lineSurface, drawingFrom.x, drawingFrom.y, FlxG.mouse.x, FlxG.mouse.y, connection);
+			FlxSpriteUtil.drawLine(ui.lineSurface, drawingFrom.x - ui.cfo.x +(FlxG.width / 2), drawingFrom.y - ui.cfo.y +(FlxG.height / 2), FlxG.mouse.x - ui.cfo.x +(FlxG.width / 2), FlxG.mouse.y - ui.cfo.y +(FlxG.height / 2), connection);
 		}
 		
 		if (FlxG.keys.anyPressed(['R']))
