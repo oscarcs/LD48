@@ -101,6 +101,7 @@ class Connection extends FlxBasic
 		
 		//WOW
 		//this is lazy!
+		/*
 		for (i in 0...star1.goodsOutput.length)
 		{
 			for (j in 0...star2.goodsInput.length)
@@ -124,6 +125,7 @@ class Connection extends FlxBasic
 				}
 			}
 		}
+		*/
 		
 		if (connectionGraphic.isOnScreen())
 		{

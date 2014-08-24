@@ -30,6 +30,8 @@ class Star extends FlxObject
 	
 	//star names
 	public var s = Assets.getText("assets/data/stars.txt").split("\n");
+	public var pre = Assets.getText("assets/data/prefixes.txt").split("\n");
+	public var suf = Assets.getText("assets/data/suffixes.txt").split("\n");
 	
 	public function new(x:Float, y:Float, size:Int, ?id:Int, ?parent:PlayState, ?newColor:Int = FlxColor.WHITE)
 	{
@@ -40,7 +42,7 @@ class Star extends FlxObject
 		this.size = size;
 		this.parent = parent;
 		this.newColor = newColor;
-		this.name = generateName();
+		this.name = generateName().toUpperCase();
 		
 		loadRate = size * (1 / 80);
 		
@@ -56,10 +58,10 @@ class Star extends FlxObject
 		starText.visible = false;
 		
 		//create resources
-		var possibleRes:Array<String> = ["Ore", "Weapons", "Boosters", "Video Games", "Chips"];	
+		var possibleRes:Array<String> = ["Ore", "Weapons", "Boosters", "Video Games", "Chips (YUM)", "Chicken Wings", "Computers"];	
 		for (i in 0...possibleRes.length)
 		{
-			if (Math.random() > 0.3)
+			if (Math.random() > 0.15)
 			{
 				if (Math.random() > 0.5) goodsOutput.push(new Resource(possibleRes[i], 0));
 				else goodsInput.push(new Resource(possibleRes[i], 0));
@@ -68,14 +70,17 @@ class Star extends FlxObject
 	
 		//flicker
 		if (Math.random() > 0.9 && size < 4) FlxSpriteUtil.flicker(starGraphic, 0, 0.5, true);
+		//orbitals
 		if (Math.random() > 0.9 && size >= 4) 
 		{
 			var planet = new Rotational(Std.random(5) + 4, this.getMidpoint());
-			planet.makeGraphic(2, 2, new CIELch(Std.random(20) + 80, 80 + Std.random(20), Std.random(361)).toNumber());
+			planet.makeGraphic(2, 2, FlxColor.WHITE);//new CIELch(Std.random(20) + 80, 80 + Std.random(20), Std.random(361)).toNumber());
 			planet.deltaTheta = (Math.random() - 0.5) / 2;
-			planet.deltaTheta += planet.deltaTheta > 0 ? 0.1 : -0.1;
+			//planet.deltaTheta += planet.deltaTheta > 0 ? 0.1 : -0.1;
 			FlxG.state.add(planet);
 		}
+		
+		//when created, add to state
 		parent.add(this);
 		FlxG.state.add(starGraphic);
 	}
@@ -105,12 +110,21 @@ class Star extends FlxObject
 				
 				//set the text
 				var reslist = "";
+					var ptA = reslist.length;
 				if (goodsInput.length > 0) reslist += "Requires:\n";
 				for (i in 0...goodsInput.length) { reslist += " - " + goodsInput[i].type + " " + Std.int(goodsInput[i].value) + "\n"; };
+					var ptB = reslist.length;
 				if(goodsOutput.length > 0) reslist += "Outputs: ("+ roundTo(loadRate*60, 4) +"/t)\n";
 				for (i in 0...goodsOutput.length) { reslist += " - " + goodsOutput[i].type + " " + Std.int(goodsOutput[i].value) + "\n"; };
-				starText.text = "Goods: " + Std.int(goodsProduced) + " \nName: " + name + "\n" + reslist;
+				
+				starText.text = name + "\n" + reslist;
 				starText.visible = true;
+				
+				//add formatting
+				ptA += (starText.text.length - reslist.length);
+				ptB += (starText.text.length - reslist.length);
+				starText.addFormat(new FlxTextFormat(FlxColor.RED), ptA, ptB);
+				starText.addFormat(new FlxTextFormat(FlxColor.GREEN), ptB, starText.text.length);
 				
 				if (FlxG.mouse.justReleasedRight)
 				{
@@ -194,8 +208,16 @@ class Star extends FlxObject
 		var n:Array<String> = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
 		//var s = readLine("assets/data/starNames.txt", Std.random(372));
 		
-		var q = Std.random(372);
-		var x:String = s[q].substr(0, s[q].length - 1);
+		var x:String;
+		if (Math.random() > 0.5)
+		{
+			var q = Std.random(372);
+			x = s[q].substr(0, s[q].length - 1);
+		}
+		else
+		{
+			x = generateCustomName();
+		}
 		
 		if (Math.random() > 0.6) x += " " + n[Std.random(n.length)];
 		return x;
@@ -206,6 +228,18 @@ class Star extends FlxObject
 		x = x * Math.pow(10, places);
 		x = Math.round(x) / Math.pow(10, places);
 		return x;
+	}
+	
+	private function generateCustomName():String
+	{
+		var c = "";
+		var q = Std.random(27);
+		c = pre[q].substr(0, pre[q].length - 1);
+		
+		var r = Std.random(10);
+		c += suf[r].substr(0, suf[r].length - 1);
+		
+		return c;
 	}
 	
 }

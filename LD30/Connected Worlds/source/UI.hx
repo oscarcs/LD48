@@ -69,6 +69,7 @@ class UI extends FlxBasic
 		minimap = new Minimap(this);
 		minimap.scrollFactor.set(0, 0);
 		minimap.current.scrollFactor.set(0, 0);
+		minimap.circlebg.scrollFactor.set(0, 0);
 		
 		lineSurface = new FlxSprite(0, 0);
 		lineSurface.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT);

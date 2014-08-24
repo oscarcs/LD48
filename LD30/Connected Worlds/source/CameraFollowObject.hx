@@ -2,6 +2,7 @@ package ;
 
 import flixel.FlxObject;
 import flixel.FlxG;
+import flixel.util.FlxMath;
 
 class CameraFollowObject extends FlxObject
 {
@@ -110,5 +111,8 @@ class CameraFollowObject extends FlxObject
 		}
 		#end
 		
+		//limit values
+		x = FlxMath.bound(x, 0 + FlxG.width / 2, FlxG.worldBounds.width - FlxG.width / 2);
+		y = FlxMath.bound(y, 0 + FlxG.height / 2, FlxG.worldBounds.height - FlxG.height / 2);
 	}
 }

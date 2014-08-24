@@ -18,7 +18,8 @@ class Minimap extends FlxSprite
 		makeGraphic(100, 100, 0x14FFFFFF);
 		
 		circlebg = new FlxSprite(x - 20, y - 20);
-		circlebg.makeGraphic(140, 140, FlxColor.TRANSPARENT);
+		circlebg.makeGraphic(140, 140, FlxColor.WHITE);
+		FlxSpriteUtil.fill(circlebg, FlxColor.TRANSPARENT);
 		FlxSpriteUtil.drawCircle(circlebg, -1, -1, -1, 0x14FFFFFF);
 		
 		for (i in 0...parent.parent.clusters.length)
@@ -26,15 +27,20 @@ class Minimap extends FlxSprite
 			var cur:Cluster = parent.parent.clusters[i];
 			var marker = new FlxSprite(0, 0);
 			
-			var markerW = 100 * (cur.width / FlxG.worldBounds.width);
-			var markerH = 100 * (cur.height / FlxG.worldBounds.height);
+			var markerW = Math.ceil(100 * (cur.width / FlxG.worldBounds.width));
+			var markerH = Math.ceil(100 * (cur.height / FlxG.worldBounds.height));
 			var markerX = 100 * (cur.x / FlxG.worldBounds.width);
 			var markerY = 100 * (cur.y / FlxG.worldBounds.height);
 			
 			//trace(markerW + "-w " + markerH + "-h " + markerX + "-x " + markerY + "-y ");
 			//trace(cur.width + "-w " + cur.height + "-h ");
 			
-			marker.makeGraphic(Math.ceil(markerW), Math.ceil(markerH), Std.parseInt("0x14" + cur.clusterColor.toHex()));
+			var ls:LineStyle = { };
+			ls.color = FlxColor.TRANSPARENT;//Std.parseInt("0x28" + cur.clusterColor.toHex());
+			ls.thickness = 1;
+			
+			marker.makeGraphic(Math.ceil(markerW), Math.ceil(markerH), FlxColor.TRANSPARENT);
+			FlxSpriteUtil.drawRect(marker, 0, 0, markerW - 1, markerH - 1, Std.parseInt("0x28" + cur.clusterColor.toHex()), ls);
 			
 			stamp(marker, Std.int(markerX), Std.int(markerY));
 		}

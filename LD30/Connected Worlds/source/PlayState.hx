@@ -1,9 +1,11 @@
 package ;
 
 import flixel.*;
+import flixel.addons.util.FlxAsyncLoop;
 import flixel.util.*;
 import flixel.util.FlxSpriteUtil;
 import flixel.FlxSprite;
+import nxColor.CIELch;
 
 class PlayState extends FlxState
 {
@@ -16,6 +18,8 @@ class PlayState extends FlxState
 	public var connectionSurface:FlxSprite;
 	public var connections:Array<FlxSprite> = [];
 	
+	
+	public var loadLoop:FlxAsyncLoop;
 	
 	
 	public var starArray:Array<Star> = [];
@@ -67,58 +71,32 @@ class PlayState extends FlxState
 		connection.color = FlxColor.WHITE;
 		connection.thickness = 2;
 		
-		/*
-		var x = 0;
-		var y = 0;
-		var lastx = 0;
-		var lasty = 0;
-		
-		for (i in 0...60)
-		{
-			var r = Std.random(5) + 1;
-			star.makeGraphic(r, r, FlxColor.TRANSPARENT);
-			FlxSpriteUtil.drawCircle(star, -1, -1, -1, FlxColor.WHITE);
-			
-			
-			x = Std.random(FlxG.width);
-			y = Std.random(FlxG.height);
-			
-			//star.scale = Math.random();
-			skySurface.stamp(star, x, y);
-			if (Math.random() > 0.9) FlxSpriteUtil.drawLine(skySurface, x, y, lastx, lasty, connection);
-			
-			lastx = x;
-			lasty = y;
-		}
-		
-		*/
-		
 		add(skySurface);
 		
-		for (i in 0...60)
+		for (i in 0...50)
 		{
-			//var stTest:Star = new Star(Std.random(FlxG.width), Std.random(FlxG.height), Std.random(4) + 2, i, this);
-			//FlxSpriteUtil.drawCircle(stTest, stTest.mid.x, stTest.mid.y, stTest.size, FlxColor.WHITE);
-			//add(stTest);
-			//starArray.push(stTest);
+			generateCluster();
 		}
 		
-		//var clusterTest = new Cluster(30, 30, 1000, 1000, this, 1);
-		
-		for (i in 0...30)
+		for (i in 0...500)
 		{
-			var clusterTest = new Cluster(Std.random(Math.ceil(FlxG.worldBounds.width)) - 500, Std.random(Math.ceil(FlxG.worldBounds.height)) - 500, Std.random(1000), Std.random(1000), this, i);
-			clusters.push(clusterTest);
+			var st = new Star(Std.random(Std.int(FlxG.worldBounds.width)), Std.random(Std.int(FlxG.worldBounds.height)), Std.random(4) + 3, 0, this); 
+			starArray.push(st);
 		}
-		
-		//var connTest = new Connection(starArray[20], starArray[22]);
-		//add(connTest);
 		
 		//add the ui last
 		ui = new UI(this);
 
 	}
 
+	private function generateCluster()
+	{
+		var clusterTest = new Cluster(Std.random(Math.ceil(FlxG.worldBounds.width)) - 1000, Std.random(Math.ceil(FlxG.worldBounds.height)) - 1000, Std.random(1000) + 500, Std.random(1000) + 500, this, 6);
+		add(clusterTest);
+		clusters.push(clusterTest);
+		//super.update();
+	}
+	
 	override public function destroy():Void
 	{
 		super.destroy();
@@ -128,6 +106,18 @@ class PlayState extends FlxState
 	{
 		super.update();
 		
+		
+		/*
+		if (!doneLoading)
+		{
+			for (i in 0...clusters.length)
+			{
+				if (clusters[i].loadLoop.finished)
+				
+				
+			}
+		}
+		*/
 		
 		timeStepCounter += FlxG.elapsed;
 		if (timeStepCounter >= 1)
