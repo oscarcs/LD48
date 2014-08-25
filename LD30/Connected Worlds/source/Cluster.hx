@@ -13,6 +13,8 @@ class Cluster extends FlxObject
 	private var loadLoop:FlxAsyncLoop;
 	private var clusterArray:Array<Star> = [];
 	private var rflag:Bool = false;
+	private var flag:Bool = false;
+	private var bg:FlxSprite = new FlxSprite(0,0);
 	
 	public function new(x:Float, y:Float, width:Float, height:Float, parent:PlayState, ?id:Int, ?gN:Int)
 	{
@@ -42,9 +44,9 @@ class Cluster extends FlxObject
 		//
 		//}
 		
-		var test = new FlxSprite(x, y);
-		test.makeGraphic(Std.int(width), Std.int(height), Std.parseInt("0x14" + clusterColor.toHex()));
-		parent.add(test);
+		//var test = new FlxSprite(x, y);
+		//test.makeGraphic(Std.int(width), Std.int(height), Std.parseInt("0x14" + clusterColor.toHex()));
+		//parent.add(test);
 				
 		
 		loadLoop = new FlxAsyncLoop(genNum, generateStar, 10);
@@ -61,6 +63,24 @@ class Cluster extends FlxObject
 	override public function update()
 	{
 		super.update();
+		
+		
+		if (this.isOnScreen() && !flag)
+		{
+			bg = new FlxSprite(x, y);
+			bg.makeGraphic(Std.int(width), Std.int(height), Std.parseInt("0x14" + clusterColor.toHex()));
+			parent.add(bg);
+			flag = true;
+		}
+		else  if (!isOnScreen())
+		{
+			flag = false;
+			bg.destroy();
+			bg = new FlxSprite(0, 0);
+		}
+		
+		
+		
 		
 		if (!loadLoop.started)
 		{

@@ -17,6 +17,8 @@ class CameraFollowObject extends FlxObject
 	public function new(parent:UI)
 	{
 		super(FlxG.width / 2, FlxG.height / 2, 1, 1);
+		x = 5000;
+		y = 5000;
 		FlxG.state.add(this);
 		
 		this.parent = parent;

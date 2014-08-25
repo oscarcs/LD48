@@ -2,21 +2,24 @@ package ;
 
 import flixel.*;
 import flixel.addons.util.FlxAsyncLoop;
+import flixel.text.FlxText;
 import flixel.util.*;
 import flixel.util.FlxSpriteUtil;
 import flixel.FlxSprite;
 import nxColor.CIELch;
+import openfl.Assets;
 
 class PlayState extends FlxState
 {
 	private var connection:LineStyle = { };
+	
 	
 	private var skySurface:FlxSprite;
 	public var lineSurface:FlxSprite;
 	
 	
 	public var connectionSurface:FlxSprite;
-	public var connections:Array<FlxSprite> = [];
+	public var connections:Array<Connection> = [];
 	
 	
 	public var loadLoop:FlxAsyncLoop;
@@ -37,15 +40,34 @@ class PlayState extends FlxState
 	
 	private var ui:UI;
 	
-	public var money:Float;
+	public var money:Float = 2500;
+	public var moneyPerTick:Float = 0;
+	public var lastMoney:Float = 0;
+	public var loseTimer:Float = 0;
+	
+	
+	public var warningText:FlxText;
+	public var warningTimer:Float = 0;
+	
+	//dicts
+	public var s = Assets.getText("assets/data/stars.txt").split("\n");
+	public var pre = Assets.getText("assets/data/prefixes.txt").split("\n");
+	public var suf = Assets.getText("assets/data/suffixes.txt").split("\n");
+	
 	
 	override public function create():Void
 	{
 		super.create();
 		
+		FlxG.camera.fade(FlxColor.BLACK, 1, true);
+		
 		#if mobile
 		FlxG.camera.zoom = 2;
 		#end
+		
+		//play tha sick beatz
+		FlxG.sound.playMusic("assets/planetarium.mp3", 0.5, true);
+		
 		
 		FlxG.worldBounds.set( 0, 0, 10000, 10000);
 		FlxG.camera.setBounds( 0, 0, 10000, 10000);
@@ -86,7 +108,13 @@ class PlayState extends FlxState
 		
 		//add the ui last
 		ui = new UI(this);
-
+		
+		warningText = new FlxText(16, FlxG.height - 32, 0, "", 16);
+		warningText.font = "assets/data/dos437.ttf";
+		add(warningText);
+		warningText.color = FlxColor.RED;
+		warningText.scrollFactor.set(0, 0);
+		//displayWarning("hello");
 	}
 
 	private function generateCluster()
@@ -122,8 +150,25 @@ class PlayState extends FlxState
 		timeStepCounter += FlxG.elapsed;
 		if (timeStepCounter >= 1)
 		{
+			//if (money - lastMoney > 0)
+			{
+				moneyPerTick = money - lastMoney;
+			}
+			
+			lastMoney = money;
 			timeStepCounter = 0;
 			++stepNumber;
+			
+			
+			if (moneyPerTick < 0 && money < 0)
+			{
+				loseTimer++;
+			}
+			
+			if (loseTimer > 5)
+			{
+				loseGame();
+			}
 		}
 		
 		FlxSpriteUtil.fill(lineSurface, FlxColor.TRANSPARENT);
@@ -138,5 +183,31 @@ class PlayState extends FlxState
 		{
 			FlxG.switchState(new PlayState());
 		}
+		
+		if (warningTimer > 0)
+		{
+			warningTimer -= FlxG.elapsed;
+		}
+		else
+		{
+			warningText.text = "";
+		}
+	}
+	
+	public function displayWarning(text:String):Void
+	{
+		warningText.text = text;
+		warningTimer = 5;
+	}
+	
+	private function loseGame()
+	{
+		displayWarning("YOU WENT BANKRUPT - GAME OVER.");
+		FlxG.camera.fade(FlxColor.BLACK, 5, false, restart);
+	}
+	
+	private function restart()
+	{
+		FlxG.switchState(new PlayState());
 	}
 }

@@ -2,6 +2,7 @@ package ;
 
 import flixel.FlxBasic;
 import flixel.FlxSprite;
+import flixel.text.FlxText;
 import flixel.util.*;
 import flixel.util.FlxSpriteUtil;
 import flixel.FlxG;
@@ -20,17 +21,100 @@ class Connection extends FlxBasic
 	private var start:FlxPoint;
 	private var end:FlxPoint;
 	
+	public var length:Float;
+	
 	public function new(star1:Star, star2:Star)
 	{
 		super();
+		
+		if (star1 == star2)
+		{
+			destroy();
+		}
+		
+		star1.parent.connections.push(this);
+		
 		this.star1 = star1;
 		this.star2 = star2;
 		ls.thickness = 2;
 		ls.color = FlxColor.WHITE;
+		
+		
+		
 		star1.connections.push(this);
 		star2.connections.push(this);
 		
+		star1.connectedTo.push(star2);
+		star2.connectedTo.push(star1);
 		
+		
+		//length = Math.sqrt(Math.pow(Math.abs(star1.x - star2.x), 2) - Math.pow(Math.abs(star1.y - star2.y), 2));
+		length = Math.sqrt(Math.abs(Math.pow(Math.abs(star2.x - star1.x), 2) - Math.pow(Math.abs(star2.y - star1.y), 2)));
+		length = Math.abs(length);
+		//trace(length);
+		
+		var cost = (2000 * (length / 200)) + Math.pow((star1.parent.connections.length + 1), 2);
+		//trace(cost);
+		//trace("length " + length);
+		//trace(2000 * (length / 200));
+		//trace(((star1.parent.connections.length+1) / 10) * 10);
+		
+		if (length > 200 || star1.parent.money < cost)
+		{
+			
+			/*
+			if (length > 200)
+			{
+				star1.parent.displayWarning("LINK TOO LONG");
+			}
+			else if (star1.parent.money < 2000*(length/200))
+			{
+				
+			}
+			*/
+			if (length > 200)
+			{
+				star1.parent.displayWarning("LINK TOO LONG");
+			}
+			else
+			{
+				star1.parent.displayWarning("ERROR CREATING LINK. " + roundTo(cost, 2) + " REQUIRED.");
+			}
+			
+			star1.connections.remove(this);
+			star2.connections.remove(this);
+			star1.parent.connections.remove(this);
+			star1.connectedTo.remove(star2);
+			star2.connectedTo.remove(star1);
+			connectionGraphic.destroy();
+			destroy();
+		}
+		else
+		{
+			star1.parent.money -= cost;
+		}
+		
+		//if there's more than one connection
+		if (star1.parent.connections.length > 1)
+		{
+			//check whether each of the stars has a connection to it
+			var p, q;
+			
+			star1.connectedTo.length > 1 ? p = true : p = false; 
+			star2.connectedTo.length > 1 ? q = true : q = false;
+			
+			///trace("\n\n\n\n" + p + " " + q);
+			//if both of them have no connection, DESTROY
+			if (!p && !q)
+			{
+				star1.parent.displayWarning("LINK NOT CONNECTED TO NETWORK");
+				
+				star1.connectedTo.remove(star2);
+				star2.connectedTo.remove(star1);
+				connectionGraphic.destroy();
+				destroy();
+			}
+		}
 		
 		//a is the leftmost one
 		var a, b;
@@ -95,9 +179,38 @@ class Connection extends FlxBasic
 		FlxG.state.add(connectionGraphic);
 	}
 	
+	override public function destroy()
+	{
+		star1.connectedTo.remove(star2);
+		star2.connectedTo.remove(star1);
+		connectionGraphic.destroy();
+		super.destroy();
+	}
+	
+	
 	override public function update()
 	{
 		super.update();
+		
+		
+		if (star1.parent.timeStepCounter >= 0.6 && star1.connections.length > 0)
+		{
+							//parent.money -= (connections[p].length / 1000);
+			if (((201 - length) / 2000) > 0)
+			{
+				star1.parent.money -= ((201 - length) / 2000);
+				//trace(((201 - length) / 2000));
+			}
+			else
+			{
+				star1.parent.money -= 0.01;
+				///trace(0.01);
+			}
+			
+		}
+		
+		
+		
 		
 		//WOW
 		//this is lazy!
@@ -160,5 +273,12 @@ class Connection extends FlxBasic
 			updated = false;
 		}
 		
+	}
+	
+	private function roundTo(x:Float, places:Int):Float
+	{
+		x = x * Math.pow(10, places);
+		x = Math.round(x) / Math.pow(10, places);
+		return x;
 	}
 }

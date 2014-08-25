@@ -68,8 +68,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/left.png", AssetType.IMAGE);
 		className.set ("assets/images/right.png", __ASSET__assets_images_right_png);
 		type.set ("assets/images/right.png", AssetType.IMAGE);
+		className.set ("assets/images/twitter.png", __ASSET__assets_images_twitter_png);
+		type.set ("assets/images/twitter.png", AssetType.IMAGE);
 		className.set ("assets/images/up.png", __ASSET__assets_images_up_png);
 		type.set ("assets/images/up.png", AssetType.IMAGE);
+		className.set ("assets/planetarium.mp3", __ASSET__assets_planetarium_mp3);
+		type.set ("assets/planetarium.mp3", AssetType.MUSIC);
 		className.set ("assets/sounds/beep.mp3", __ASSET__assets_sounds_beep_mp3);
 		type.set ("assets/sounds/beep.mp3", AssetType.MUSIC);
 		className.set ("assets/sounds/flixel.mp3", __ASSET__assets_sounds_flixel_mp3);
@@ -112,9 +116,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/images/right.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
+		id = "assets/images/twitter.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/up.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
+		id = "assets/planetarium.mp3";
+		path.set (id, id);
+		type.set (id, AssetType.MUSIC);
 		id = "assets/sounds/beep.mp3";
 		path.set (id, id);
 		type.set (id, AssetType.MUSIC);
@@ -162,8 +172,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("assets/images/right.png", __ASSET__assets_images_right_png);
 		type.set ("assets/images/right.png", AssetType.IMAGE);
 		
+		className.set ("assets/images/twitter.png", __ASSET__assets_images_twitter_png);
+		type.set ("assets/images/twitter.png", AssetType.IMAGE);
+		
 		className.set ("assets/images/up.png", __ASSET__assets_images_up_png);
 		type.set ("assets/images/up.png", AssetType.IMAGE);
+		
+		className.set ("assets/planetarium.mp3", __ASSET__assets_planetarium_mp3);
+		type.set ("assets/planetarium.mp3", AssetType.MUSIC);
 		
 		className.set ("assets/sounds/beep.mp3", __ASSET__assets_sounds_beep_mp3);
 		type.set ("assets/sounds/beep.mp3", AssetType.MUSIC);
@@ -798,7 +814,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__assets_images_down_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_left_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_right_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_twitter_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_up_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_planetarium_mp3 extends openfl.media.Sound { }
 @:keep class __ASSET__assets_sounds_beep_mp3 extends openfl.media.Sound { }
 @:keep class __ASSET__assets_sounds_flixel_mp3 extends openfl.media.Sound { }
 
@@ -808,6 +826,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__assets_data_dos437_ttf extends flash.text.Font { #if (!openfl_html5_dom) public function new () { super (); fontName = "assets/data/dos437.ttf"; } #end }
 
 @:keep class __ASSET__assets_data_perfect_dos_vga_437_perfect_dos_vga_437_ttf extends flash.text.Font { #if (!openfl_html5_dom) public function new () { super (); fontName = "assets/data/perfect_dos_vga_437/Perfect DOS VGA 437.ttf"; } #end }
+
+
 
 
 
@@ -835,7 +855,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:bitmap("assets/images/down.png") class __ASSET__assets_images_down_png extends flash.display.BitmapData {}
 @:bitmap("assets/images/left.png") class __ASSET__assets_images_left_png extends flash.display.BitmapData {}
 @:bitmap("assets/images/right.png") class __ASSET__assets_images_right_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/twitter.png") class __ASSET__assets_images_twitter_png extends flash.display.BitmapData {}
 @:bitmap("assets/images/up.png") class __ASSET__assets_images_up_png extends flash.display.BitmapData {}
+@:sound("assets/planetarium.mp3") class __ASSET__assets_planetarium_mp3 extends flash.media.Sound {}
 @:sound("E:/Haxe/haxe/lib/flixel/3,3,5/assets/sounds/beep.mp3") class __ASSET__assets_sounds_beep_mp3 extends flash.media.Sound {}
 @:sound("E:/Haxe/haxe/lib/flixel/3,3,5/assets/sounds/flixel.mp3") class __ASSET__assets_sounds_flixel_mp3 extends flash.media.Sound {}
 

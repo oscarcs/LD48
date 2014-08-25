@@ -1,6 +1,7 @@
 package ;
 
 import flixel.util.FlxSave;
+import openfl.Assets;
 
 /**
  * Handy, pre-built Registry class that can be used to store
@@ -9,6 +10,12 @@ import flixel.util.FlxSave;
  */
 class Reg
 {
+	
+	public var s = Assets.getText("assets/data/stars.txt").split("\n");
+	public var pre = Assets.getText("assets/data/prefixes.txt").split("\n");
+	public var suf = Assets.getText("assets/data/suffixes.txt").split("\n");
+	
+	
 	/**
 	 * Generic levels Array that can be used for cross-state stuff.
 	 * Example usage: Storing the levels of a platformer.

@@ -13,7 +13,7 @@ class Star extends FlxObject
 	public var size:Int;
 	public var newColor:Int;
 	public var name:String;
-	private var parent:PlayState;
+	public var parent:PlayState;
 	public var connectedTo:Array<Star> = [];	
 	public var starGraphic:FlxSprite;
 	public var starText:FlxText;
@@ -29,9 +29,6 @@ class Star extends FlxObject
 	public var goodStored:Array<Resource> = [];
 	
 	//star names
-	public var s = Assets.getText("assets/data/stars.txt").split("\n");
-	public var pre = Assets.getText("assets/data/prefixes.txt").split("\n");
-	public var suf = Assets.getText("assets/data/suffixes.txt").split("\n");
 	
 	public function new(x:Float, y:Float, size:Int, ?id:Int, ?parent:PlayState, ?newColor:Int = FlxColor.WHITE)
 	{
@@ -44,7 +41,7 @@ class Star extends FlxObject
 		this.newColor = newColor;
 		this.name = generateName().toUpperCase();
 		
-		loadRate = size * (1 / 80);
+		loadRate = Math.abs((size + Std.random(8) - 4) * (1 / 80));
 		
 		starGraphic = new FlxSprite(x, y);
 		starGraphic.makeGraphic(size, size, newColor);
@@ -58,10 +55,13 @@ class Star extends FlxObject
 		starText.visible = false;
 		
 		//create resources
-		var possibleRes:Array<String> = ["Ore", "Weapons", "Boosters", "Video Games", "Chips (YUM)", "Chicken Wings", "Computers"];	
+		var possibleRes:Array<String> = ["Ore", "Weapons", "Boosters", "Video Games", "Chips", "Chicken Wings", 
+										"Computers", "Pizza", "Soda", "Corn", "Tacos", "Legos", "Ants",
+										"Pants", "Animes", "Robots", "Onions", "Leaves", "Tubes",
+										"Machinery", "Furniture", "Pencils"];	
 		for (i in 0...possibleRes.length)
 		{
-			if (Math.random() > 0.15)
+			if (Math.random() > 0.8)
 			{
 				if (Math.random() > 0.5) goodsOutput.push(new Resource(possibleRes[i], 0));
 				else goodsInput.push(new Resource(possibleRes[i], 0));
@@ -93,7 +93,32 @@ class Star extends FlxObject
 		
 		if (parent.timeStepCounter >= 0.5 && connections.length > 0)
 		{
-			goodsProduced += loadRate;
+			//goodsProduced += loadRate;
+			for (i in 0...connectedTo.length)
+			{
+				//do the goods transfer
+				var cur = connectedTo[i];
+				for (i in 0...goodsOutput.length)
+				{
+					for (j in 0...cur.goodsInput.length)
+					{
+						if (goodsOutput[i].type == cur.goodsInput[j].type)
+						{
+							//cur.goodsInput[j].value += loadRate;
+							parent.money += loadRate;
+						}
+					}
+				}
+			}
+			
+			/*
+			for (p in 0...connections.length)
+			{
+				//parent.money -= (connections[p].length / 1000);
+				parent.money -= (1+(200 - connections[p].length) / 200);
+				trace(1+(200 - connections[p].length) / 200);
+			}
+			*/
 		}
 
 		if (isOnScreen())
@@ -112,10 +137,10 @@ class Star extends FlxObject
 				var reslist = "";
 					var ptA = reslist.length;
 				if (goodsInput.length > 0) reslist += "Requires:\n";
-				for (i in 0...goodsInput.length) { reslist += " - " + goodsInput[i].type + " " + Std.int(goodsInput[i].value) + "\n"; };
+				for (i in 0...goodsInput.length) { reslist += " - " + goodsInput[i].type + " " + /*Std.int(goodsInput[i].value) + */"\n"; };
 					var ptB = reslist.length;
-				if(goodsOutput.length > 0) reslist += "Outputs: ("+ roundTo(loadRate*60, 4) +"/t)\n";
-				for (i in 0...goodsOutput.length) { reslist += " - " + goodsOutput[i].type + " " + Std.int(goodsOutput[i].value) + "\n"; };
+				if(goodsOutput.length > 0) reslist += "Outputs: ("+ roundTo(loadRate*60, 4) +"/T)\n";
+				for (i in 0...goodsOutput.length) { reslist += " - " + goodsOutput[i].type + " " + /*Std.int(goodsOutput[i].value) + */"\n"; };
 				
 				starText.text = name + "\n" + reslist;
 				starText.visible = true;
@@ -212,7 +237,7 @@ class Star extends FlxObject
 		if (Math.random() > 0.5)
 		{
 			var q = Std.random(372);
-			x = s[q].substr(0, s[q].length - 1);
+			x = parent.s[q].substr(0, parent.s[q].length - 1);
 		}
 		else
 		{
@@ -223,23 +248,23 @@ class Star extends FlxObject
 		return x;
 	}
 	
+	private function generateCustomName():String
+	{
+		var c = "";
+		var q = Std.random(26);
+		c = parent.pre[q].substr(0, parent.pre[q].length - 1);
+
+		var r = Std.random(24);
+		c += parent.suf[r].substr(0, parent.suf[r].length - 1);
+		
+		return c;
+	}
+	
 	private function roundTo(x:Float, places:Int):Float
 	{
 		x = x * Math.pow(10, places);
 		x = Math.round(x) / Math.pow(10, places);
 		return x;
-	}
-	
-	private function generateCustomName():String
-	{
-		var c = "";
-		var q = Std.random(27);
-		c = pre[q].substr(0, pre[q].length - 1);
-		
-		var r = Std.random(10);
-		c += suf[r].substr(0, suf[r].length - 1);
-		
-		return c;
 	}
 	
 }

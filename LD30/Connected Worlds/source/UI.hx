@@ -86,7 +86,14 @@ class UI extends FlxBasic
 	{
 		super.update();
 		FlxSpriteUtil.fill(lineSurface, FlxColor.TRANSPARENT);
-		stepNumberText.text = "step: " + parent.stepNumber + ", " + parent.starArray.length + " stars";
+		stepNumberText.text = "YEAR " + parent.stepNumber + " | " + parent.starArray.length + " STARS\n$" + roundTo(parent.money,2) + "\nGPT: " + roundTo(parent.moneyPerTick, 2);
+	}
+	
+	private function roundTo(x:Float, places:Int):Float
+	{
+		x = x * Math.pow(10, places);
+		x = Math.round(x) / Math.pow(10, places);
+		return x;
 	}
 	
 }
